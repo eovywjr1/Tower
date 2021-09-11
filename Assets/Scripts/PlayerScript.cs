@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    public int tutorialIndex;
+
     public float horizontal, vertical;
     public float moveSpeed;
 
@@ -16,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        tutorialIndex = 1;
     }
 
     private void Update()
@@ -34,11 +37,12 @@ public class PlayerScript : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Horizontal"))
+        if (Input.GetButton("Horizontal"))
             isHorizentalDown = true;
         else if (Input.GetButtonUp("Horizontal"))
             isHorizentalDown = false;
-        if (Input.GetButtonDown("Vertical"))
+
+        if (Input.GetButton("Vertical"))
             isVerticalDown = true;
         else if (Input.GetButtonUp("Vertical"))
             isVerticalDown = false;
@@ -49,5 +53,10 @@ public class PlayerScript : MonoBehaviour
             moveDireciton = new Vector2(0, vertical);
         else
             moveDireciton = new Vector2(0, 0);
+    }
+
+    void attack()
+    {
+
     }
 }
