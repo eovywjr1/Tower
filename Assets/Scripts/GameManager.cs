@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private void Update()
+    //새로하기
+    public void StartGame()
     {
+        SceneManager.LoadScene("1F");
+    }
+
+    //종료하기
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

@@ -10,25 +10,35 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed;
 
     public bool isHorizentalDown, isVerticalDown;
+    public bool isTalk;
 
     public Vector2 moveDireciton;
 
     Rigidbody2D rigidBody;
+    SpriteRenderer spriteRenderer;
+    Animator animator;
 
-    private void Start()
+    private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        tutorialIndex = 1;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         MoveDirection();
+        FlipChange();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            Attack();
+        else
+            animator.SetBool("isAttack", false);
     }
 
     private void FixedUpdate()
     {
-        rigidBody.velocity = moveDireciton * moveSpeed;
+        Move();
     }
 
     //위, 아래 방향 설정
@@ -38,9 +48,17 @@ public class PlayerScript : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
 
         if (Input.GetButton("Horizontal"))
+        {
             isHorizentalDown = true;
+            animator.SetBool("isMove", true);
+        }
         else if (Input.GetButtonUp("Horizontal"))
+        {
             isHorizentalDown = false;
+            animator.SetBool("isMove", true);
+        }
+        else
+            animator.SetBool("isMove", false);
 
         if (Input.GetButton("Vertical"))
             isVerticalDown = true;
@@ -55,8 +73,29 @@ public class PlayerScript : MonoBehaviour
             moveDireciton = new Vector2(0, 0);
     }
 
-    void attack()
+    //대화 중 움직임 x
+    void Move()
     {
+        if (!isTalk)
+            rigidBody.velocity = moveDireciton * moveSpeed;
+        else
+            rigidBody.velocity = new Vector2(0, 0);
+    }
 
+    //방향 전환
+    void FlipChange()
+    {
+        if (isHorizentalDown)
+        {
+            if (horizontal > 0)
+                spriteRenderer.flipX = false;
+            else
+                spriteRenderer.flipX = true;
+        }
+    }
+
+    void Attack()
+    {
+        animator.SetBool("isAttack", true);
     }
 }

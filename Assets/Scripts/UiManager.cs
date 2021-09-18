@@ -6,40 +6,41 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    Dictionary<int, string> tutorialData;
-
-    Text text;
+    public Image image;
+    public Text text;
 
     PlayerScript playerScript;
+    TalkManager talkManager;
 
-    //새로하기
-    public void StartGame()
+    private void Awake()
     {
-        SceneManager.LoadScene("1F");
-
         playerScript = FindObjectOfType<PlayerScript>();
-
-        SetData();
+        talkManager = FindObjectOfType<TalkManager>();
     }
 
-    //종료하기
-    public void ExitGame()
+    private void Update()
     {
-        Application.Quit();
-    }
+        if (image.gameObject.activeSelf)
+        {
+            playerScript.isTalk = true;
 
-    //튜토리얼 대화 데이터 생성
-    public void SetData()
-    {
-        tutorialData.Add(1, "방향키로 검은색 부분까지 이동하세요");
-        tutorialData.Add(2, "앞에 보이는 쥐를 공격해보세요");
-        tutorialData.Add(3, "다음 층으로 보내드리겠습니다.");
-    }
+            //대화 텍스트 표시
+            text.text = talkManager.GetData(playerScript.tutorialIndex);
 
-    //대화창 활성화 시 데이터 표시
-    private void OnEnable()
-    {
-        text.text = tutorialData[playerScript.tutorialIndex];
-        playerScript.tutorialIndex++;
+            //스페이스 바 누르면 다음 대화 표시 or 끄기
+            if (image != null && image.gameObject.activeSelf)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (playerScript.tutorialIndex != 1)
+                    {
+                        image.gameObject.SetActive(false);
+                        playerScript.isTalk = false;
+                    }
+                    playerScript.tutorialIndex++;
+                    text.text = talkManager.GetData(playerScript.tutorialIndex);
+                }
+            }
+        }
     }
 }
