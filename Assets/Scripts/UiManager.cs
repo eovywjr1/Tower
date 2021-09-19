@@ -30,9 +30,9 @@ public class UiManager : MonoBehaviour
             //스페이스 바 누르면 다음 대화 표시 or 끄기
             if (image != null && image.gameObject.activeSelf)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.G))
                 {
-                    if (playerScript.tutorialIndex != 1)
+                    if (playerScript.tutorialIndex > 2)
                     {
                         image.gameObject.SetActive(false);
                         playerScript.isTalk = false;

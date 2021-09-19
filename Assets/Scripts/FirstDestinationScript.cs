@@ -8,18 +8,17 @@ public class FirstDestinationScript : MonoBehaviour
     public Image image;
     public GameObject firstBoss;
 
+    //튜토리얼 원형 트리거 시
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (this.gameObject.name == "FirstDestination")
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log(collision.tag);
-            if (collision.CompareTag("Player"))
+            this.gameObject.SetActive(false);
+
+            if (image != null && firstBoss != null)
             {
-                if (image != null && firstBoss != null)
-                {
-                    image.gameObject.SetActive(true);
-                    firstBoss.SetActive(true);
-                }
+                image.gameObject.SetActive(true);
+                firstBoss.SetActive(true);
             }
         }
     }
