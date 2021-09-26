@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BossBaseScript : MonoBehaviour
 {
-    public int hp;
+    public int maxHp;
+    public int currentHp;
 
     public bool isDie;
 
@@ -13,26 +14,24 @@ public class BossBaseScript : MonoBehaviour
     private void Awake()
     {
         playerScript = FindObjectOfType<PlayerScript>();
+
+        currentHp = maxHp;
     }
 
     private void Update()
     {
-        if (hp < 0)
+        if (currentHp <= 0)
             isDie = true;
     }
 
     public void Ondamaged(int power)
     {
-        hp -= power;
+        currentHp -= power;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
-
         if (collision.CompareTag("PlayerAttack"))
-        {
             Ondamaged(playerScript.power);
-        }
     }
 }

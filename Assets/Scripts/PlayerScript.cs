@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     public bool isHorizentalDown, isVerticalDown;
     public bool isTalk;
     public bool isAttackDelay, isAvoidanceDelay;
+    public bool isAvoidancePossible;
 
     public Vector2 moveDireciton;
 
@@ -21,12 +22,13 @@ public class PlayerScript : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator animator;
 
-
     public GameObject attackObject;
     BoxCollider2D attackCollider;
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -50,7 +52,7 @@ public class PlayerScript : MonoBehaviour
             else
                 animator.SetBool("isAttack", false);
 
-            if (!isAvoidanceDelay)
+            if (!isAvoidanceDelay && isAvoidancePossible)
             {
                 if (Input.GetKey(KeyCode.Space))
                     Avoidance();
@@ -77,7 +79,7 @@ public class PlayerScript : MonoBehaviour
             isHorizentalDown = false;
 
         //이동 애니메이션 설정
-        if (horizontal != 0 || vertical != 0)
+        if (horizontal != 0 || vertical != 0 && !isAttackDelay)
             animator.SetBool("isMove", true);
         else
             animator.SetBool("isMove", false);
@@ -92,7 +94,7 @@ public class PlayerScript : MonoBehaviour
     //대화 중 움직임 x
     void Move()
     {
-        if (!isTalk)
+        if (!isTalk && !isAttackDelay)
             rigidBody.velocity = moveDireciton * moveSpeed;
         else
             rigidBody.velocity = new Vector2(0, 0);
@@ -116,7 +118,6 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
-
 
     //기본공격 함수
     void Attack()
