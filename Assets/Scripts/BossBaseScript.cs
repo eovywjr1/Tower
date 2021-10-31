@@ -9,13 +9,11 @@ public class BossBaseScript : MonoBehaviour
 
     public bool isDie;
 
-    PlayerScript playerScript;
+    public PlayerScript playerScript;
 
     private void Awake()
     {
         playerScript = FindObjectOfType<PlayerScript>();
-
-        currentHp = maxHp;
     }
 
     private void Update()

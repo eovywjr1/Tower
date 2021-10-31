@@ -58,8 +58,6 @@ public class PlayerScript : MonoBehaviour
                     Avoidance();
             }
         }
-        else
-            animator.SetBool("isState", true);
     }
 
     private void FixedUpdate()
