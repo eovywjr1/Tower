@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,22 +35,30 @@ public class GameManager : MonoBehaviour
 
     void MapChange()
     {
-        //1Ãþ Å¬¸®¾î
+        
         if (bossBaseScript != null)
         {
-            if (SceneManager.GetActiveScene().name == "1F")
+            if (bossBaseScript.isDie)
             {
-                if (bossBaseScript.isDie)
+                StartCoroutine(EndCoolTime());
+                //1Ãþ Å¬¸®¾î
+                if (SceneManager.GetActiveScene().name == "1F")
                 {
-                    playerScript.power++;
-                    playerScript.isAvoidancePossible = true;
-
-                    talkImage.gameObject.SetActive(true);
+                    if (playerScript.tutorialIndex >= 5)
+                    {
+                        playerScript.power++;
+                        playerScript.isAvoidancePossible = true;
+                        playerScript.transform.position = new Vector2(0, -7);
+                        SceneManager.LoadScene("2F");
+                    }
                 }
-
-                if (playerScript.tutorialIndex >= 5)
-                    SceneManager.LoadScene("2F");
             }
         }
+    }
+
+    IEnumerator EndCoolTime()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+        talkImage.gameObject.SetActive(true);
     }
 }

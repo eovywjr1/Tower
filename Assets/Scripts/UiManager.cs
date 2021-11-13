@@ -6,7 +6,8 @@ public class UiManager : MonoBehaviour
     public Image talkImage;
 
     public Text talkText;
-    public Text hpText;
+    public Text bossHpText;
+    public Text playerHpText;
 
     BossBaseScript bossBaseScript;
     PlayerScript playerScript;
@@ -21,7 +22,8 @@ public class UiManager : MonoBehaviour
     private void Update()
     {
         TutorialTalkShow();
-        HpShow();
+        BossHpShow();
+        PlyerHpShow();
     }
 
     //1층 튜토리얼 talk UI show
@@ -52,16 +54,21 @@ public class UiManager : MonoBehaviour
         }
     }
 
-    //hp bar 표시
-    void HpShow()
+    //보스 hp bar 표시
+    void BossHpShow()
     {
-        if (hpText.gameObject.activeSelf)
+        if (bossHpText.gameObject.activeSelf)
         {
             if (bossBaseScript == null)
                 bossBaseScript = FindObjectOfType<BossBaseScript>();
 
             if (!bossBaseScript.isDie)
-                hpText.text = bossBaseScript.currentHp + " / " + bossBaseScript.maxHp;
+                bossHpText.text = bossBaseScript.currentHp + " / " + bossBaseScript.maxHp;
         }
+    }
+
+    void PlyerHpShow()
+    {
+        playerHpText.text = "♥ x " + playerScript.currentHp;
     }
 }

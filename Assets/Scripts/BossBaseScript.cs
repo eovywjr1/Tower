@@ -2,34 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossBaseScript : MonoBehaviour
+public class BossBaseScript : DamagedScript
 {
     public int maxHp;
-    public int currentHp;
 
     public bool isDie;
 
-    public PlayerScript playerScript;
-
-    private void Awake()
+    public virtual void Update()
     {
-        playerScript = FindObjectOfType<PlayerScript>();
+        JudgeDie();
     }
 
-    private void Update()
+    public void JudgeDie()
     {
         if (currentHp <= 0)
+        {
             isDie = true;
-    }
-
-    public void Ondamaged(int power)
-    {
-        currentHp -= power;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("PlayerAttack"))
-            Ondamaged(playerScript.power);
+            gameObject.SetActive(false);
+        }
     }
 }

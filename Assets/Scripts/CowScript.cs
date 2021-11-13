@@ -17,8 +17,9 @@ public class CowScript : BossBaseScript
         DrawDashLine();
     }
 
-    private void Update()
+    public override void Update()
     {
+        JudgeDie();
         if (isDash)
             Dash();
 
@@ -51,7 +52,7 @@ public class CowScript : BossBaseScript
     //선 그은 후 돌진 쿨타임
     IEnumerator StartDashDelay()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         line.SetActive(false);
         isDash = true;

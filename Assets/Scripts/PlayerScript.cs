@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : DamagedScript
 {
     public int power;
-
     public int tutorialIndex;
 
     public float horizontal, vertical;
     public float moveSpeed;
+    public float attackSpeed = 0.5f;
+    public float attackAnimationSpeed = 1f;
 
     public bool isHorizentalDown, isVerticalDown;
-    public bool isTalk;
+    public bool isTalk, isDamaged;
     public bool isAttackDelay, isAvoidanceDelay;
     public bool isAvoidancePossible;
 
@@ -25,7 +26,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject attackObject;
     BoxCollider2D attackCollider;
 
-    private void Awake()
+    public override void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
 
@@ -37,21 +38,17 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
+        OtherAnimation();
         if (!isTalk)
         {
-            animator.SetBool("isState",false);
-
-            MoveDirection();
-            FlipChange();
-
             if (!isAttackDelay)
             {
                 if (Input.GetKey(KeyCode.LeftControl))
                     Attack();
+                MoveDirection();
+                FlipChange();
             }
-            else
-                animator.SetBool("isAttack", false);
-
+            
             if (!isAvoidanceDelay && isAvoidancePossible)
             {
                 if (Input.GetKey(KeyCode.Space))
@@ -63,6 +60,26 @@ public class PlayerScript : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+    }
+
+    public override void Ondamaged(int power)
+    {
+        currentHp -= power;
+        isDamaged = true;
+        StartCoroutine(Damaged());
+    }
+
+    //함수에 있지 않은 애니메이션
+    void OtherAnimation()
+    {
+        if (!isTalk)
+        {
+            animator.SetBool("isState", false);
+            if(isAttackDelay)
+                animator.SetBool("isAttack", false);
+        }
+        else
+            animator.SetBool("isState", true);
     }
 
     void MoveDirection()
@@ -121,6 +138,7 @@ public class PlayerScript : MonoBehaviour
     void Attack()
     {
         isAttackDelay = true;
+        animator.SetFloat("AttackSpeed", attackAnimationSpeed); //attackSpeed 0.1 감소 >> attackAnimationSpeed 0.2 증가
         animator.SetBool("isAttack", true);
         attackObject.SetActive(true);
         StartCoroutine(AttackDelay());
@@ -139,7 +157,7 @@ public class PlayerScript : MonoBehaviour
     //기본공격 딜레이 코루틴
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSecondsRealtime(0.7f);
+        yield return new WaitForSecondsRealtime(attackSpeed);
 
         isAttackDelay = false;
         attackObject.SetActive(false);
@@ -150,5 +168,13 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSecondsRealtime(5f);
 
         isAvoidanceDelay = false;
+    }
+
+    IEnumerator Damaged()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSecondsRealtime(0.2f);
+        spriteRenderer.color = Color.white;
+        isDamaged = false;
     }
 }
