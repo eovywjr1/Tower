@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerScript : DamagedScript
 {
     public int power;
-    public int tutorialIndex;
+    public int talkId;
 
     public float horizontal, vertical;
     public float moveSpeed;

@@ -10,15 +10,14 @@ public class CowScript : BossBaseScript
     public LineRenderer lineRenderer;
     public Vector2 playerPosition;
 
+    public bool isPattern;
     public bool isDash;
-
-    private void Start()
-    {
-        DrawDashLine();
-    }
 
     public override void Update()
     {
+        if(isStart && !isPattern)
+            StartCoroutine(PatternCooltime());
+
         JudgeDie();
         if (isDash)
             Dash();
@@ -27,6 +26,7 @@ public class CowScript : BossBaseScript
         if (transform.position.x == playerPosition.x
             && transform.position.y == playerPosition.y)
         {
+            isPattern = false;
             isDash = false;
             this.gameObject.layer = 6;
         }
@@ -56,5 +56,13 @@ public class CowScript : BossBaseScript
 
         line.SetActive(false);
         isDash = true;
+    }
+
+    IEnumerator PatternCooltime()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
+        isPattern = true;
+        DrawDashLine();
     }
 }

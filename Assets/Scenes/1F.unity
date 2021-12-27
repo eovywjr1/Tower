@@ -316,7 +316,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!4 &307503109
 Transform:
@@ -344,7 +344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fcf2a8a2dd2ac448dcb2ac306bea21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 2115566714}
+  uiManager: {fileID: 1493121774}
+  talk: {fileID: 2115566712}
+  hp: {fileID: 1223281725}
   boss: {fileID: 1024161285}
 --- !u!1 &432536953
 GameObject:
@@ -1039,6 +1041,7 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   maxHp: 5
   isDie: 0
+  isStart: 0
 --- !u!1 &1146301636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,7 +1914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1223281726
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2228,10 +2231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd76fdd9f5ac97409e5623dd354e6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  talkIndex: 0
   talkImage: {fileID: 2115566714}
   talkText: {fileID: 1168258670}
   bossHpText: {fileID: 1723838431}
   playerHpText: {fileID: 1702760981}
+  hpGroup: {fileID: 1223281725}
+  bossBaseScript: {fileID: 1024161290}
 --- !u!4 &1493121775
 Transform:
   m_ObjectHideFlags: 0
@@ -2342,7 +2348,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fcf2a8a2dd2ac448dcb2ac306bea21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  uiManager: {fileID: 0}
+  talk: {fileID: 0}
+  hp: {fileID: 0}
   boss: {fileID: 0}
 --- !u!61 &1613522460
 BoxCollider2D:
@@ -3114,7 +3122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1723838430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3293,7 +3301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1830496085
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3480,7 +3488,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fcf2a8a2dd2ac448dcb2ac306bea21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  uiManager: {fileID: 0}
+  talk: {fileID: 0}
+  hp: {fileID: 0}
   boss: {fileID: 0}
 --- !u!61 &2018088715
 BoxCollider2D:
@@ -3658,7 +3668,7 @@ MonoBehaviour:
   currentHp: 0
   playerScript: {fileID: 0}
   power: 1
-  tutorialIndex: 1
+  talkId: 10
   horizontal: 0
   vertical: 0
   moveSpeed: 3

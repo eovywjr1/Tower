@@ -35,7 +35,6 @@ public class GameManager : MonoBehaviour
 
     void MapChange()
     {
-        
         if (bossBaseScript != null)
         {
             if (bossBaseScript.isDie)
@@ -44,7 +43,7 @@ public class GameManager : MonoBehaviour
                 //1Ãþ Å¬¸®¾î
                 if (SceneManager.GetActiveScene().name == "1F")
                 {
-                    if (playerScript.tutorialIndex >= 5)
+                    if (playerScript.talkId == 40)
                     {
                         playerScript.power++;
                         playerScript.isAvoidancePossible = true;

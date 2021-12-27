@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class FirstDestinationScript : MonoBehaviour
+public class startDestinationScript : MonoBehaviour
 {
-    public Image image;
+    public UiManager uiManager;
+
+    public GameObject talk;
+    public GameObject hp;
     public GameObject boss;
 
     //튜토리얼 원형 트리거 시
@@ -16,9 +19,11 @@ public class FirstDestinationScript : MonoBehaviour
         {
             if (boss != null)
             {
-                if (image != null)
-                    image.gameObject.SetActive(true);
-                boss.SetActive(true);
+                if (talk != null)
+                {
+                    talk.SetActive(true);
+                    uiManager.FirstTalkShow();
+                }
 
             }
             this.gameObject.SetActive(false);

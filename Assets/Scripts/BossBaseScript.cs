@@ -7,6 +7,7 @@ public class BossBaseScript : DamagedScript
     public int maxHp;
 
     public bool isDie;
+    public bool isStart;
 
     public virtual void Update()
     {

@@ -1,68 +1,80 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
+    public int talkIndex;
+
     public Image talkImage;
 
     public Text talkText;
     public Text bossHpText;
     public Text playerHpText;
 
-    BossBaseScript bossBaseScript;
+    public GameObject hpGroup;
+
+    public BossBaseScript bossBaseScript;
     PlayerScript playerScript;
     TalkManager talkManager;
 
     private void Awake()
     {
+        talkIndex = 0;
         playerScript = FindObjectOfType<PlayerScript>();
         talkManager = FindObjectOfType<TalkManager>();
+        FirstTalkShow();
     }
 
     private void Update()
     {
-        TutorialTalkShow();
+        //스페이스 바 누르면 다음 대화 표시 or 끄기
+        if (talkImage.gameObject.activeSelf && Input.GetKeyDown(KeyCode.G))
+            NextTalkShow();
         BossHpShow();
         PlyerHpShow();
     }
 
-    //1층 튜토리얼 talk UI show
-    void TutorialTalkShow()
+    public void FirstTalkShow()
     {
-        if (talkImage != null)
+        playerScript.isTalk = true;
+        talkText.text = talkManager.GetData(playerScript.talkId, talkIndex++);
+    }
+
+    //talk UI show
+    public void NextTalkShow()
+    {
+        string talkData = talkManager.GetData(playerScript.talkId, talkIndex++);
+
+        if (talkData == null)
         {
-            if (talkImage.gameObject.activeSelf)
+            talkImage.gameObject.SetActive(false);
+            playerScript.isTalk = false;
+            talkIndex = 0;
+            playerScript.talkId = playerScript.talkId - playerScript.talkId % 10 + 10;
+
+            if (playerScript.talkId % 20 == 10)
             {
-                playerScript.isTalk = true;
-
-                //대화 텍스트 표시
-                talkText.text = talkManager.GetData(playerScript.tutorialIndex);
-
-                //스페이스 바 누르면 다음 대화 표시 or 끄기
-                if (Input.GetKeyDown(KeyCode.G))
-                {
-                    if (playerScript.tutorialIndex > 1)
-                    {
-                        talkImage.gameObject.SetActive(false);
-                        playerScript.isTalk = false;
-                    }
-
-                    playerScript.tutorialIndex++;
-                    talkText.text = talkManager.GetData(playerScript.tutorialIndex);
-                }
+                hpGroup.SetActive(true);
+                bossBaseScript.gameObject.SetActive(true);
+                bossBaseScript.isStart = true;
             }
+
+            return;
         }
+
+        talkText.text = talkData;
     }
 
     //보스 hp bar 표시
     void BossHpShow()
     {
-        if (bossHpText.gameObject.activeSelf)
+        if (hpGroup.activeSelf)
         {
             if (bossBaseScript == null)
                 bossBaseScript = FindObjectOfType<BossBaseScript>();
 
-            if (!bossBaseScript.isDie)
+            if (!bossBaseScript.isDie && hpGroup.activeSelf)
                 bossHpText.text = bossBaseScript.currentHp + " / " + bossBaseScript.maxHp;
         }
     }
