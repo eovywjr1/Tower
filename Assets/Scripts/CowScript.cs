@@ -42,9 +42,10 @@ public class CowScript : BossBaseScript
     //돌진 전 선 긋기
     void DrawDashLine()
     {
+        Debug.Log("1");
         playerPosition = playerScript.transform.position;
         line.SetActive(true);
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, new Vector2(transform.position.x, transform.position.y - 4));
         lineRenderer.SetPosition(1, playerPosition);
         StartCoroutine(StartDashDelay());
     }
@@ -60,9 +61,10 @@ public class CowScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
+        isPattern = true;
+
         yield return new WaitForSecondsRealtime(3f);
 
-        isPattern = true;
         DrawDashLine();
     }
 }
