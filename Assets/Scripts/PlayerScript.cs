@@ -147,10 +147,8 @@ public class PlayerScript : DamagedScript
     //회피 함수
     void Avoidance()
     {
-        float x = this.gameObject.transform.position.x, y = this.gameObject.transform.position.y;
-
         isAvoidanceDelay = true;
-        this.gameObject.transform.position = new Vector2(x + moveDireciton.x * 2, y + moveDireciton.y * 2);
+        this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 2, transform.position.y + vertical * 2);
         StartCoroutine(AvoidanceDelay());
     }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public class DamagedScript : MonoBehaviour
 {
     public int currentHp;
+
+    public bool isBossDamagePossible = true;
     public PlayerScript playerScript;
 
     public virtual void Awake()
@@ -19,9 +21,9 @@ public class DamagedScript : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.CompareTag("Boss") && collision.CompareTag("PlayerAttack"))
+        if (isBossDamagePossible && gameObject.CompareTag("Boss") && collision.CompareTag("PlayerAttack"))
             Ondamaged(playerScript.power);
-        if(gameObject.CompareTag("Player") && collision.gameObject.layer == 7)
+        if (gameObject.CompareTag("Player") && collision.gameObject.layer == 7)
             Ondamaged(1);
     }
 }
