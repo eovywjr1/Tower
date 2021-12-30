@@ -16,11 +16,6 @@ public class GameManager : MonoBehaviour
         playerScript = FindObjectOfType<PlayerScript>();
     }
 
-    private void Update()
-    {
-        MapChange();
-    }
-
     //새로하기
     public void StartGame()
     {
@@ -33,31 +28,23 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    void MapChange()
+    public void MapChange()
     {
-        if (bossBaseScript != null)
-        {
-            if (bossBaseScript.isDie)
-            {
-                StartCoroutine(EndCoolTime());
-                //1층 클리어
-                if (SceneManager.GetActiveScene().name == "1F")
-                {
-                    if (playerScript.talkId == 40)
-                    {
-                        playerScript.power++;
-                        playerScript.isAvoidancePossible = true;
-                        playerScript.transform.position = new Vector2(0, -7);
-                        SceneManager.LoadScene("2F");
-                    }
-                }
-            }
-        }
-    }
+        string currentMapName = SceneManager.GetActiveScene().name;
 
-    IEnumerator EndCoolTime()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-        talkImage.gameObject.SetActive(true);
+        switch (currentMapName)
+        {
+            //1층 클리어
+            case "1F":
+                playerScript.power++;
+                playerScript.isAvoidancePossible = true;
+                playerScript.transform.position = new Vector2(0, -7);
+                SceneManager.LoadScene("2F");
+                break;
+            case "2F":
+                playerScript.transform.position = new Vector2(0, -7);
+                SceneManager.LoadScene("3F");
+                break;
+        }
     }
 }

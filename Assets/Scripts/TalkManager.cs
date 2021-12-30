@@ -25,7 +25,7 @@ public class TalkManager : MonoBehaviour
     //데이터 반환
     public string GetData(int id, int talkIndex)
     {
-        if (talkIndex != tutorialData[id].Length)
+        if (talkIndex < tutorialData[id].Length)
             return tutorialData[id][talkIndex];
         else
             return null;

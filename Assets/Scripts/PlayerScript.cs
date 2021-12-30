@@ -175,4 +175,10 @@ public class PlayerScript : DamagedScript
         spriteRenderer.color = Color.white;
         isDamaged = false;
     }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+            Ondamaged(1);
+    }
 }

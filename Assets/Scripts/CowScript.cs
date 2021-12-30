@@ -5,12 +5,14 @@ using UnityEngine;
 public class CowScript : BossBaseScript
 {
     public int random;
+    public int feedIndex;
 
     public float speed;
 
     public GameObject line;
     public GameObject circle;
     public GameObject dung;
+    public GameObject[] feed;
     public LineRenderer[] directionRenderer;
     public LineRenderer lineRenderer;
     public Vector2 playerPosition;
@@ -18,11 +20,15 @@ public class CowScript : BossBaseScript
     public bool isPattern;
     public bool isDash;
     public bool isPushDown;
+    public bool isGoToFeed;
 
     public override void Update()
     {
         if (isStart && !isPattern)
+        {
+            isPattern = true;
             StartCoroutine(PatternCooltime());
+        }
 
         JudgeDie();
         if (isDash)
@@ -35,6 +41,16 @@ public class CowScript : BossBaseScript
             isPattern = false;
             isDash = false;
             gameObject.layer = 6;
+        }
+
+        if(isPattern && isGoToFeed)
+        {
+            if (feedIndex > 3)
+                EndFeed();
+            else if (feed[feedIndex].activeSelf)
+                GoToFeed(feedIndex);
+            else
+                feedIndex++;
         }
     }
 
@@ -94,8 +110,8 @@ public class CowScript : BossBaseScript
     void Dung()
     {
         isBossDamagePossible = false;
-        dung.SetActive(true);
         isPattern = false;
+        dung.SetActive(true);
         StartCoroutine(DungEndTime());
     }
 
@@ -113,6 +129,32 @@ public class CowScript : BossBaseScript
         gameObject.layer = 6;
     }
 
+    void StartFeed()
+    {
+        for (int i = 0; i < feed.Length; i++)
+            feed[i].SetActive(true);
+        StartCoroutine(FeedStartTime());
+    }
+
+    void GoToFeed(int index)
+    {
+        transform.position = Vector2.MoveTowards(transform.position, feed[index].transform.position, Time.deltaTime * speed);
+    }
+       
+    void EndFeed()
+    {
+        isPattern = false;
+        isGoToFeed = false;
+        feedIndex = 0;
+    }
+
+    public void Recovery(int hp)
+    {
+        currentHp += hp;
+        if (maxHp < currentHp)
+            currentHp = maxHp;
+    }
+
     //선 그은 후 돌진 쿨타임
     IEnumerator StartDashDelay()
     {
@@ -124,12 +166,14 @@ public class CowScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
-        isPattern = true;
-
         yield return new WaitForSecondsRealtime(3f);
 
         playerPosition = playerScript.transform.position;
-        random = Random.Range(0, 3);
+
+        if (random != 3)
+            random = Random.Range(0, 4);
+        else
+            random = Random.Range(0, 3);
         switch (random)
         {
             case 0:
@@ -139,6 +183,9 @@ public class CowScript : BossBaseScript
                 CircleActive();
                 break;
             case 2:
+                StartFeed();
+                break;
+            case 3:
                 Dung();
                 break;
         }
@@ -146,7 +193,6 @@ public class CowScript : BossBaseScript
 
     IEnumerator PushDownCoolTime()
     {
-
         yield return new WaitForSecondsRealtime(1f);
 
         PushDown();
@@ -164,5 +210,12 @@ public class CowScript : BossBaseScript
         yield return new WaitForSecondsRealtime(10f);
 
         EndDung();
+    }
+
+    IEnumerator FeedStartTime()
+    {
+        yield return new WaitForSecondsRealtime(5f);
+
+        isGoToFeed = true;
     }
 }

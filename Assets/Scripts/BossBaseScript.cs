@@ -9,6 +9,8 @@ public class BossBaseScript : DamagedScript
     public bool isDie;
     public bool isStart;
 
+    public UiManager uiManager;
+
     public virtual void Update()
     {
         JudgeDie();
@@ -20,6 +22,13 @@ public class BossBaseScript : DamagedScript
         {
             isDie = true;
             gameObject.SetActive(false);
+            uiManager.StartEndCoolTime();
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isBossDamagePossible && collision.CompareTag("PlayerAttack"))
+            Ondamaged(playerScript.power);
     }
 }

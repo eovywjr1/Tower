@@ -18,12 +18,4 @@ public class DamagedScript : MonoBehaviour
     {
         currentHp -= power;
     }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (isBossDamagePossible && gameObject.CompareTag("Boss") && collision.CompareTag("PlayerAttack"))
-            Ondamaged(playerScript.power);
-        if (gameObject.CompareTag("Player") && collision.gameObject.layer == 7)
-            Ondamaged(1);
-    }
 }

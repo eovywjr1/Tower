@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 
 public class UiManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class UiManager : MonoBehaviour
 
     public GameObject hpGroup;
 
+    public GameManager gameManager;
     public BossBaseScript bossBaseScript;
     PlayerScript playerScript;
     TalkManager talkManager;
@@ -28,8 +31,7 @@ public class UiManager : MonoBehaviour
 
     private void Update()
     {
-        //스페이스 바 누르면 다음 대화 표시 or 끄기
-        if (talkImage.gameObject.activeSelf && Input.GetKeyDown(KeyCode.G))
+        if(talkImage.gameObject.activeSelf && Input.GetKeyDown(KeyCode.G))
             NextTalkShow();
         BossHpShow();
         PlyerHpShow();
@@ -37,6 +39,7 @@ public class UiManager : MonoBehaviour
 
     public void FirstTalkShow()
     {
+        talkImage.gameObject.SetActive(true);
         playerScript.isTalk = true;
         talkText.text = talkManager.GetData(playerScript.talkId, talkIndex++);
     }
@@ -60,6 +63,9 @@ public class UiManager : MonoBehaviour
                 bossBaseScript.isStart = true;
             }
 
+            else if (playerScript.talkId > 20 && playerScript.talkId % 20 == 0)
+                gameManager.MapChange();
+
             return;
         }
 
@@ -71,16 +77,27 @@ public class UiManager : MonoBehaviour
     {
         if (hpGroup.activeSelf)
         {
-            if (bossBaseScript == null)
-                bossBaseScript = FindObjectOfType<BossBaseScript>();
-
-            if (!bossBaseScript.isDie && hpGroup.activeSelf)
+            if (!bossBaseScript.isDie)
                 bossHpText.text = bossBaseScript.currentHp + " / " + bossBaseScript.maxHp;
+            else
+                bossHpText.text = 0 + " / " + bossBaseScript.maxHp;
         }
     }
 
     void PlyerHpShow()
     {
         playerHpText.text = "♥ x " + playerScript.currentHp;
+    }
+
+    public void StartEndCoolTime()
+    {
+        StartCoroutine(EndCoolTime());
+    }
+
+    IEnumerator EndCoolTime()
+    {
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        FirstTalkShow();
     }
 }

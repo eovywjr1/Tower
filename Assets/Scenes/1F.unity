@@ -1038,10 +1038,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 5
+  isBossDamagePossible: 1
   playerScript: {fileID: 0}
   maxHp: 5
   isDie: 0
   isStart: 0
+  uiManager: {fileID: 1493121774}
 --- !u!1 &1146301636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,6 +2239,7 @@ MonoBehaviour:
   bossHpText: {fileID: 1723838431}
   playerHpText: {fileID: 1702760981}
   hpGroup: {fileID: 1223281725}
+  gameManager: {fileID: 1617999611}
   bossBaseScript: {fileID: 1024161290}
 --- !u!4 &1493121775
 Transform:
@@ -3666,6 +3669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 0
+  isBossDamagePossible: 1
   playerScript: {fileID: 0}
   power: 1
   talkId: 10
