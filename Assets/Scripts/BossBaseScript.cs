@@ -6,21 +6,15 @@ public class BossBaseScript : DamagedScript
 {
     public int maxHp;
 
-    public bool isDie;
     public bool isStart;
+    public bool isBossDamagePossible = true;
 
     public UiManager uiManager;
 
-    public virtual void Update()
-    {
-        JudgeDie();
-    }
-
     public void JudgeDie()
     {
-        if (currentHp <= 0)
+        if (isDie)
         {
-            isDie = true;
             gameObject.SetActive(false);
             uiManager.StartEndCoolTime();
         }
@@ -29,6 +23,9 @@ public class BossBaseScript : DamagedScript
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isBossDamagePossible && collision.CompareTag("PlayerAttack"))
+        {
             Ondamaged(playerScript.power);
+            JudgeDie();
+        }
     }
 }

@@ -22,7 +22,7 @@ public class CowScript : BossBaseScript
     public bool isPushDown;
     public bool isGoToFeed;
 
-    public override void Update()
+    public void Update()
     {
         if (isStart && !isPattern)
         {

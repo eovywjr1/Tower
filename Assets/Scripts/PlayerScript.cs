@@ -26,10 +26,10 @@ public class PlayerScript : DamagedScript
     public GameObject attackObject;
     BoxCollider2D attackCollider;
 
+    public UiManager uiManager;
+
     public override void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -39,7 +39,7 @@ public class PlayerScript : DamagedScript
     private void Update()
     {
         OtherAnimation();
-        if (!isTalk)
+        if (!isTalk && !isDie)
         {
             if (!isAttackDelay)
             {
@@ -62,9 +62,11 @@ public class PlayerScript : DamagedScript
         Move();
     }
 
-    public override void Ondamaged(int power)
+    public void Playerdamaged(int power)
     {
-        currentHp -= power;
+        Ondamaged(power);
+        if (JudgeDie())
+            return;
         isDamaged = true;
         StartCoroutine(Damaged());
     }
@@ -152,6 +154,17 @@ public class PlayerScript : DamagedScript
         StartCoroutine(AvoidanceDelay());
     }
 
+    public bool JudgeDie()
+    {
+        if (isDie)
+        {
+            uiManager.PlayerDiedShowText();
+
+            return true;
+        }
+        return false;
+    }
+
     //기본공격 딜레이 코루틴
     IEnumerator AttackDelay()
     {
@@ -171,14 +184,17 @@ public class PlayerScript : DamagedScript
     IEnumerator Damaged()
     {
         spriteRenderer.color = Color.red;
-        yield return new WaitForSecondsRealtime(0.2f);
+        yield return new WaitForSecondsRealtime(1f);
         spriteRenderer.color = Color.white;
         isDamaged = false;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 7)
+        if (!isDamaged && collision.gameObject.layer == 7)
+        {
             Ondamaged(1);
+            JudgeDie();
+        }
     }
 }

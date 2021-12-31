@@ -20,6 +20,8 @@ public class TalkManager : MonoBehaviour
         tutorialData.Add(30, new string[] { "다음 층으로 보내드리겠습니다." });
         tutorialData.Add(40, new string[] { "회피 기술을 획득했습니다.\n회피 - Space Bar", "2층 소 시작하겠습니다." });
         tutorialData.Add(50, new string[] { "다음 층으로 보내드리겠습니다." });
+        tutorialData.Add(60, new string[] { "3층 호랑이 시작하겠습니다." });
+
     }
 
     //데이터 반환

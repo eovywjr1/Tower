@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     public int talkIndex;
 
     public Image talkImage;
+    public Image diedImage;
 
     public Text talkText;
     public Text bossHpText;
@@ -54,7 +55,7 @@ public class UiManager : MonoBehaviour
             talkImage.gameObject.SetActive(false);
             playerScript.isTalk = false;
             talkIndex = 0;
-            playerScript.talkId = playerScript.talkId - playerScript.talkId % 10 + 10;
+            playerScript.talkId += 10;
 
             if (playerScript.talkId % 20 == 10)
             {
@@ -92,6 +93,11 @@ public class UiManager : MonoBehaviour
     public void StartEndCoolTime()
     {
         StartCoroutine(EndCoolTime());
+    }
+
+    public void PlayerDiedShowText()
+    {
+        diedImage.gameObject.SetActive(true);
     }
 
     IEnumerator EndCoolTime()
