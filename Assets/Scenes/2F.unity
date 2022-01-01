@@ -545,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &140672331
 Transform:
   m_ObjectHideFlags: 0
@@ -656,7 +656,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6, y: 0.7}
+  m_Size: {x: 0.6, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &140672336
 MonoBehaviour:
@@ -672,11 +672,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 5
   isDie: 0
-  playerScript: {fileID: 0}
   maxHp: 5
   isStart: 0
   isBossDamagePossible: 1
+  playerPosition: {x: 0, y: 0}
   uiManager: {fileID: 853081458}
+  playerScript: {fileID: 1942519928}
   random: 0
   feedIndex: 0
   speed: 15
@@ -694,7 +695,6 @@ MonoBehaviour:
   - {fileID: 694432199}
   - {fileID: 741688656}
   lineRenderer: {fileID: 931910965}
-  playerPosition: {x: 0, y: 0}
   isPattern: 0
   isDash: 0
   isPushDown: 0
@@ -1069,11 +1069,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
-  playerScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
+  playerPosition: {x: 0, y: 0}
   uiManager: {fileID: 0}
+  playerScript: {fileID: 0}
   cow: {fileID: 140672336}
 --- !u!212 &568738704
 SpriteRenderer:
@@ -2859,11 +2860,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
-  playerScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
+  playerPosition: {x: 0, y: 0}
   uiManager: {fileID: 0}
+  playerScript: {fileID: 0}
   cow: {fileID: 140672336}
 --- !u!212 &1040600968
 SpriteRenderer:
@@ -8331,11 +8333,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
-  playerScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
+  playerPosition: {x: 0, y: 0}
   uiManager: {fileID: 0}
+  playerScript: {fileID: 0}
   cow: {fileID: 140672336}
 --- !u!212 &1519468012
 SpriteRenderer:
@@ -9530,11 +9533,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
-  playerScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
+  playerPosition: {x: 0, y: 0}
   uiManager: {fileID: 0}
+  playerScript: {fileID: 0}
   cow: {fileID: 140672336}
 --- !u!1 &1942519926
 GameObject:
@@ -9590,7 +9594,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 5
   isDie: 0
-  playerScript: {fileID: 0}
   power: 2
   talkId: 40
   horizontal: 0

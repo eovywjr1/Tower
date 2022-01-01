@@ -220,7 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307503106
 GameObject:
@@ -1107,7 +1107,7 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1024161288
 SpriteRenderer:
@@ -1195,11 +1195,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 5
   isDie: 0
-  playerScript: {fileID: 0}
   maxHp: 5
   isStart: 0
   isBossDamagePossible: 1
+  playerPosition: {x: 0, y: 0}
   uiManager: {fileID: 1493121774}
+  playerScript: {fileID: 2048215323}
 --- !u!1 &1146301636
 GameObject:
   m_ObjectHideFlags: 0
@@ -3975,7 +3976,7 @@ Transform:
   - {fileID: 432536954}
   - {fileID: 1270630748}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2048215321
 BoxCollider2D:
@@ -4038,7 +4039,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
-  playerScript: {fileID: 0}
   power: 1
   talkId: 10
   horizontal: 0

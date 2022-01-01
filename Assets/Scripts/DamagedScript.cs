@@ -7,12 +7,6 @@ public class DamagedScript : MonoBehaviour
     public int currentHp;
 
     public bool isDie;
-    public PlayerScript playerScript;
-
-    public virtual void Awake()
-    {
-        playerScript = FindObjectOfType<PlayerScript>();
-    }
 
     public virtual void Ondamaged(int power)
     {

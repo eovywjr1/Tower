@@ -15,7 +15,6 @@ public class CowScript : BossBaseScript
     public GameObject[] feed;
     public LineRenderer[] directionRenderer;
     public LineRenderer lineRenderer;
-    public Vector2 playerPosition;
 
     public bool isPattern;
     public bool isDash;

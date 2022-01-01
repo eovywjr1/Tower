@@ -16,6 +16,7 @@ public class PlayerScript : DamagedScript
     public bool isTalk, isDamaged;
     public bool isAttackDelay, isAvoidanceDelay;
     public bool isAvoidancePossible;
+    public bool isFaint;
 
     public Vector2 moveDireciton;
 
@@ -28,7 +29,7 @@ public class PlayerScript : DamagedScript
 
     public UiManager uiManager;
 
-    public override void Awake()
+    public void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -38,28 +39,42 @@ public class PlayerScript : DamagedScript
 
     private void Update()
     {
-        OtherAnimation();
-        if (!isTalk && !isDie)
+        if (!isTalk)
         {
-            if (!isAttackDelay)
+            animator.SetBool("isState", false);
+
+            if (!isDie && !isFaint)
             {
-                if (Input.GetKey(KeyCode.LeftControl))
-                    Attack();
-                MoveDirection();
-                FlipChange();
+                if (!isAttackDelay)
+                {
+                    if (Input.GetKey(KeyCode.LeftControl))
+                        Attack();
+                    MoveDirection();
+                    FlipChange();
+                }
+
+                if (!isAvoidanceDelay && isAvoidancePossible)
+                {
+                    if (Input.GetKey(KeyCode.Space))
+                        Avoidance();
+                }
             }
-            
-            if (!isAvoidanceDelay && isAvoidancePossible)
-            {
-                if (Input.GetKey(KeyCode.Space))
-                    Avoidance();
-            }
+            else
+                Stop();
         }
+        else
+            animator.SetBool("isState", true);
     }
 
     private void FixedUpdate()
     {
         Move();
+    }
+
+    void Stop()
+    {
+        animator.SetBool("isMove", false);
+        rigidBody.velocity = new Vector2(0, 0);
     }
 
     public void Playerdamaged(int power)
@@ -69,19 +84,6 @@ public class PlayerScript : DamagedScript
             return;
         isDamaged = true;
         StartCoroutine(Damaged());
-    }
-
-    //함수에 있지 않은 애니메이션
-    void OtherAnimation()
-    {
-        if (!isTalk)
-        {
-            animator.SetBool("isState", false);
-            if(isAttackDelay)
-                animator.SetBool("isAttack", false);
-        }
-        else
-            animator.SetBool("isState", true);
     }
 
     void MoveDirection()
@@ -96,7 +98,7 @@ public class PlayerScript : DamagedScript
             isHorizentalDown = false;
 
         //이동 애니메이션 설정
-        if (horizontal != 0 || vertical != 0 && !isAttackDelay)
+        if (!isAttackDelay && (horizontal != 0 || vertical != 0))
             animator.SetBool("isMove", true);
         else
             animator.SetBool("isMove", false);
@@ -111,10 +113,8 @@ public class PlayerScript : DamagedScript
     //대화 중 움직임 x
     void Move()
     {
-        if (!isTalk && !isAttackDelay)
+        if (!isTalk && !isAttackDelay && !isFaint)
             rigidBody.velocity = moveDireciton * moveSpeed;
-        else
-            rigidBody.velocity = new Vector2(0, 0);
     }
 
     //방향 전환
@@ -122,7 +122,6 @@ public class PlayerScript : DamagedScript
     {
         if (isHorizentalDown)
         {
-
             if (horizontal > 0)
             {
                 spriteRenderer.flipX = false;
@@ -143,6 +142,8 @@ public class PlayerScript : DamagedScript
         animator.SetFloat("AttackSpeed", attackAnimationSpeed); //attackSpeed 0.1 감소 >> attackAnimationSpeed 0.2 증가
         animator.SetBool("isAttack", true);
         attackObject.SetActive(true);
+
+        StartCoroutine(AttackAnimationFalseCorutine());
         StartCoroutine(AttackDelay());
     }
 
@@ -163,6 +164,19 @@ public class PlayerScript : DamagedScript
             return true;
         }
         return false;
+    }
+
+    public void Faint()
+    {
+        isFaint = true;
+        StartCoroutine(UnFaintCorutine());
+    }
+
+    IEnumerator UnFaintCorutine()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+
+        isFaint = false;
     }
 
     //기본공격 딜레이 코루틴
@@ -187,6 +201,13 @@ public class PlayerScript : DamagedScript
         yield return new WaitForSecondsRealtime(1f);
         spriteRenderer.color = Color.white;
         isDamaged = false;
+    }
+
+    IEnumerator AttackAnimationFalseCorutine()
+    {
+        yield return new WaitForSecondsRealtime(0.01f);
+
+        animator.SetBool("isAttack", false);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
