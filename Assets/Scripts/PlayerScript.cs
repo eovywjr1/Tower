@@ -160,6 +160,7 @@ public class PlayerScript : DamagedScript
         if (isDie)
         {
             uiManager.PlayerDiedShowText();
+            rigidBody.velocity = new Vector2(0, 0);
 
             return true;
         }
@@ -212,10 +213,15 @@ public class PlayerScript : DamagedScript
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isDamaged && collision.gameObject.layer == 7)
+        if (!isDamaged)
         {
-            Ondamaged(1);
-            JudgeDie();
+            if (collision.gameObject.layer == 7)
+            {
+                Ondamaged(1);
+                JudgeDie();
+            }
+            else if (collision.gameObject.layer == 8)
+                isFaint = true;
         }
     }
 }

@@ -4,98 +4,173 @@ using UnityEngine;
 
 public class TigerScript : BossBaseScript
 {
+    public int random;
+
     public GameObject wind;
-    public Vector2 direction;
+    public GameObject scratch;
+    public GameObject bite;
+    public GameObject biteFindTarget;
+    public Vector3 reverseDirection;
     public Rigidbody2D rigidBody;
+    public SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        BackStep();
+        rigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        StartCoroutine(PatternCooltime());
+    }
+
+    void FindReverseDirection()
+    {
+        Vector3 target = transform.position - playerPosition;
+
+        if (Mathf.Abs(target.x) >= Mathf.Abs(target.y))
+        {
+            if (target.x >= 0)
+                reverseDirection = Vector3.right;
+            else
+                reverseDirection = Vector3.left;
+        }
+        else
+        {
+            if (target.y >= 0)
+                reverseDirection = Vector3.up;
+            else
+                reverseDirection = Vector3.down;
+        }
     }
 
     void BackStep()
     {
-        playerPosition = playerScript.transform.position;
-        if (Mathf.Abs(transform.position.x - playerPosition.x) > 1)
+        FindReverseDirection();
+        rigidBody.velocity = reverseDirection * 5;
+        StartCoroutine(PatternStopCorutine(0.25f, BackStepStop));
+    }
+
+    void BackStepStop()
+    {
+        rigidBody.velocity = new Vector2(0, 0);
+
+        StartCoroutine(PatternStartCorutine(Color.white, 2f, Cry));
+    }
+
+    void ObjectArrange(GameObject gameObject, int addPositionMax, int addPositionmin, int addRotationZ)
+    {
+        if (reverseDirection == Vector3.right)
         {
-            if (transform.position.x > playerPosition.x)
-                direction = new Vector2(1, 0);
-            else
-                direction = new Vector2(-1, 0);
+            gameObject.transform.position = new Vector2(transform.position.x - addPositionMax, transform.position.y + addPositionmin);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 0 + addRotationZ);
+        }
+        else if (reverseDirection == Vector3.up)
+        {
+            gameObject.transform.position = new Vector2(transform.position.x - addPositionmin, transform.position.y - addPositionMax);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 90 + addRotationZ);
+        }
+        else if (reverseDirection == Vector3.left)
+        {
+            gameObject.transform.position = new Vector2(transform.position.x + addPositionMax, transform.position.y - addPositionmin);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 180 + addRotationZ);
         }
         else
-            direction = new Vector2(0, 0);
-
-        if (Mathf.Abs(transform.position.y - playerPosition.y) > 1)
         {
-            if (transform.position.y > playerPosition.y)
-                direction = new Vector2(direction.x, 1);
-            else
-                direction = new Vector2(direction.x, -1);
+            gameObject.transform.position = new Vector2(transform.position.x + addPositionmin, transform.position.y + addPositionMax);
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, 270 + addRotationZ);
         }
-        else
-            direction = new Vector2(direction.x, 0);
-
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.velocity = direction * 5;
-        StartCoroutine(StopCorutine());
-
-        //transform.position = new Vector2(transform.position.x + direction.x, transform.position.y + direction.y);
     }
 
     void Cry()
     {
         wind.SetActive(true);
+        ObjectArrange(wind, 6, 1, 0);
 
-        if (direction.x == 1 && direction.y == 0)
-        {
-            wind.transform.position = new Vector2(transform.position.x - 6, transform.position.y + 1);
-            wind.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (direction.x == 0 && direction.y == 1)
-        {
-            wind.transform.position = new Vector2(transform.position.x - 1, transform.position.y - 6);
-            wind.transform.rotation = Quaternion.Euler(0, 0, 90);
-        }
-        else if (direction.x == -1 && direction.y == 0)
-        {
-            wind.transform.position = new Vector2(transform.position.x + 6, transform.position.y - 1);
-            wind.transform.rotation = Quaternion.Euler(0, 0, 180);
-        }
-        else
-        {
-            wind.transform.position = new Vector2(transform.position.x + 1, transform.position.y + 6);
-            wind.transform.rotation = Quaternion.Euler(0, 0, 270);
-        }
-
-        StartCoroutine(CryStopCorutine());
+        StartCoroutine(PatternStopCorutine(1f, CryStop));
     }
 
     void CryStop()
     {
         wind.SetActive(false);
+
+        StartCoroutine(PatternCooltime());
     }
 
-    IEnumerator StopCorutine()
+    void Scratch()
     {
-        yield return new WaitForSecondsRealtime(0.25f);
-
-        rigidBody.velocity = new Vector2(0, 0);
-
-        StartCoroutine(CryCorutine());
+        scratch.SetActive(true);
+        FindReverseDirection();
+        ObjectArrange(scratch, 3, 0, 220);
+        StartCoroutine(PatternStopCorutine(0.5f, ScratchStop));
     }
 
-    IEnumerator CryCorutine()
+    void ScratchStop()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        scratch.SetActive(false);
 
-        Cry();
+        StartCoroutine(PatternCooltime());
     }
 
-    IEnumerator CryStopCorutine()
+    void BiteFindTargetStart()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        biteFindTarget.SetActive(true);
+        StartCoroutine(PatternStartCorutine(Color.red, 0.5f, BiteFindTargetStop));
+    }
+    
+    void BiteFindTargetStop()
+    {
+        biteFindTarget.SetActive(false);
 
-        CryStop();
+        StartCoroutine(PatternCooltime());
+    }
+
+    public void Bite()
+    {
+        biteFindTarget.SetActive(false);
+        bite.SetActive(true);
+        bite.transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f);
+        StartCoroutine(PatternStopCorutine(0.5f, BiteStop));
+    }
+
+    void BiteStop()
+    {
+        bite.SetActive(false);
+    }
+
+    IEnumerator PatternCooltime()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
+        playerPosition = playerScript.transform.position;
+
+        random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0:
+                BackStep();
+                break;
+            case 1:
+                StartCoroutine(PatternStartCorutine(Color.red, 1f, Scratch));
+                break;
+            case 2:
+                StartCoroutine(PatternStartCorutine(Color.red, 1f, BiteFindTargetStart));
+                break;
+        }
+    }
+
+    IEnumerator PatternStopCorutine(float time, System.Action action)
+    {
+        yield return new WaitForSecondsRealtime(time);
+
+        action();
+    }
+
+    IEnumerator PatternStartCorutine(Color startColor, float time, System.Action action)
+    {
+        spriteRenderer.color = startColor;
+
+        yield return new WaitForSecondsRealtime(time);
+
+        spriteRenderer.color = Color.white;
+        action();
     }
 }

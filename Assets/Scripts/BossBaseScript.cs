@@ -9,7 +9,7 @@ public class BossBaseScript : DamagedScript
     public bool isStart;
     public bool isBossDamagePossible = true;
 
-    public Vector2 playerPosition;
+    public Vector3 playerPosition;
 
     public UiManager uiManager;
     public PlayerScript playerScript;
