@@ -113,6 +113,7 @@ public class TigerScript : BossBaseScript
     void BiteFindTargetStart()
     {
         biteFindTarget.SetActive(true);
+        biteFindTarget.transform.position = transform.position;
         StartCoroutine(PatternStartCorutine(Color.red, 0.5f, BiteFindTargetStop));
     }
     
@@ -140,20 +141,23 @@ public class TigerScript : BossBaseScript
     {
         yield return new WaitForSecondsRealtime(3f);
 
-        playerPosition = playerScript.transform.position;
-
-        random = Random.Range(0, 3);
-        switch (random)
+        if (!playerScript.isDie)
         {
-            case 0:
-                BackStep();
-                break;
-            case 1:
-                StartCoroutine(PatternStartCorutine(Color.red, 1f, Scratch));
-                break;
-            case 2:
-                StartCoroutine(PatternStartCorutine(Color.red, 1f, BiteFindTargetStart));
-                break;
+            playerPosition = playerScript.transform.position;
+
+            random = Random.Range(0, 3);
+            switch (random)
+            {
+                case 0:
+                    BackStep();
+                    break;
+                case 1:
+                    StartCoroutine(PatternStartCorutine(Color.red, 1f, Scratch));
+                    break;
+                case 2:
+                    StartCoroutine(PatternStartCorutine(Color.red, 1f, BiteFindTargetStart));
+                    break;
+            }
         }
     }
 

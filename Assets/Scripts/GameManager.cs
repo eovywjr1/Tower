@@ -7,6 +7,9 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public Image listScene;
+    public Image status;
+    public InputField bossHpInput;
+    public InputField playerHpInput;
 
     //새로하기
     public void StartGame()
@@ -14,16 +17,42 @@ public class GameManager : MonoBehaviour
         listScene.gameObject.SetActive(true);
     }
 
+    void InputDefault(string mapName)
+    {
+        status.gameObject.SetActive(true);
+
+        switch (mapName)
+        {
+            case "1F":
+            case "2F":
+                bossHpInput.text = "5";
+                playerHpInput.text = "5";
+                break;
+            case "3F":
+                bossHpInput.text = "10";
+                playerHpInput.text = "5";
+                break;
+        }
+    }
+
+    public void LoadTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
     public void Load1F()
     {
+        InputDefault("1F");
         SceneManager.LoadScene("1F");
     }
     public void Load2F()
     {
+        InputDefault("2F");
         SceneManager.LoadScene("2F");
     }
     public void Load3F()
     {
+        InputDefault("3F");
         SceneManager.LoadScene("3F");
     }
 
@@ -31,11 +60,6 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-    public void LoadTitle()
-    {
-        SceneManager.LoadScene("Title");
     }
 
     public void MapChange()

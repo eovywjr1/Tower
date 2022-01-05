@@ -77,13 +77,22 @@ public class PlayerScript : DamagedScript
         rigidBody.velocity = new Vector2(0, 0);
     }
 
-    public void Playerdamaged(int power)
+    public void PlayerDamaged(int power)
     {
-        Ondamaged(power);
+        if (!isDamaged)
+            Ondamaged(power);
         if (JudgeDie())
             return;
+
         isDamaged = true;
-        StartCoroutine(Damaged());
+        spriteRenderer.color = Color.red;
+        StartCoroutine(PatternStopCorutine(1f, DamagedStop));
+    }
+
+    void DamagedStop()
+    {
+        spriteRenderer.color = Color.white;
+        isDamaged = false;
     }
 
     void MoveDirection()
@@ -170,14 +179,19 @@ public class PlayerScript : DamagedScript
     public void Faint()
     {
         isFaint = true;
-        StartCoroutine(UnFaintCorutine());
+        StartCoroutine(PatternStopCorutine(1f, UnFaint));
     }
 
-    IEnumerator UnFaintCorutine()
+    void UnFaint()
     {
-        yield return new WaitForSecondsRealtime(1f);
-
         isFaint = false;
+    }
+
+    IEnumerator PatternStopCorutine(float time, System.Action action)
+    {
+        yield return new WaitForSecondsRealtime(time);
+
+        action();
     }
 
     //기본공격 딜레이 코루틴
@@ -198,10 +212,7 @@ public class PlayerScript : DamagedScript
 
     IEnumerator Damaged()
     {
-        spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(1f);
-        spriteRenderer.color = Color.white;
-        isDamaged = false;
     }
 
     IEnumerator AttackAnimationFalseCorutine()
@@ -217,11 +228,10 @@ public class PlayerScript : DamagedScript
         {
             if (collision.gameObject.layer == 7)
             {
-                Ondamaged(1);
-                JudgeDie();
+                PlayerDamaged(1);
             }
             else if (collision.gameObject.layer == 8)
-                isFaint = true;
+                Faint();
         }
     }
 }

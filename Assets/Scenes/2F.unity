@@ -675,7 +675,7 @@ MonoBehaviour:
   maxHp: 5
   isStart: 0
   isBossDamagePossible: 1
-  playerPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 853081458}
   playerScript: {fileID: 1942519928}
   random: 0
@@ -911,6 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listScene: {fileID: 0}
 --- !u!1 &412576721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,7 +1073,7 @@ MonoBehaviour:
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
-  playerPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
   cow: {fileID: 140672336}
@@ -2863,7 +2864,7 @@ MonoBehaviour:
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
-  playerPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
   cow: {fileID: 140672336}
@@ -3093,7 +3094,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: "\uD655\uC778"
 --- !u!222 &1080609256
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3215,7 +3216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -84.99999}
+  m_AnchoredPosition: {x: 0, y: -85}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231159248
@@ -8336,7 +8337,7 @@ MonoBehaviour:
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
-  playerPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
   cow: {fileID: 140672336}
@@ -9536,7 +9537,7 @@ MonoBehaviour:
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
-  playerPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
   cow: {fileID: 140672336}
@@ -9608,6 +9609,7 @@ MonoBehaviour:
   isAttackDelay: 0
   isAvoidanceDelay: 0
   isAvoidancePossible: 1
+  isFaint: 0
   moveDireciton: {x: 0, y: 0}
   attackObject: {fileID: 2106513155}
   uiManager: {fileID: 853081458}

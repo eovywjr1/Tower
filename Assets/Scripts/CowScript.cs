@@ -169,20 +169,24 @@ public class CowScript : BossBaseScript
 
         playerPosition = playerScript.transform.position;
 
+        int startindex = 0;
+
+        if (currentHp == maxHp)
+            startindex = 1;
         if (random != 3)
-            random = Random.Range(0, 4);
+            random = Random.Range(startindex, 4);
         else
-            random = Random.Range(0, 3);
+            random = Random.Range(startindex, 3);
         switch (random)
         {
             case 0:
-                DrawDashLine();
+                StartFeed();
                 break;
             case 1:
                 CircleActive();
                 break;
             case 2:
-                StartFeed();
+                DrawDashLine();
                 break;
             case 3:
                 Dung();

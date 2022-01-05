@@ -10,7 +10,6 @@ public class BiteScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("!");
             tigerScript.Bite();
         }
     }
