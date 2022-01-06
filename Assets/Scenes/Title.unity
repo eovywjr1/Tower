@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3F
+  m_Text: 6F
 --- !u!222 &65437304
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3F
+  m_Text: 5F
 --- !u!222 &145820123
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -469,14 +469,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224287611}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load3F
-        m_Mode: 1
+        m_MethodName: SetHp
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 5F
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &214929736
@@ -599,7 +599,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 268511153}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1224287611}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &268511153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +799,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3F
+  m_Text: 4F
 --- !u!222 &307318503
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -796,6 +808,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 307318500}
   m_CullTransparentMesh: 1
+--- !u!1 &372885852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 372885853}
+  - component: {fileID: 372885854}
+  m_Layer: 0
+  m_Name: StartHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &372885853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372885852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.5913, y: 74.16187, z: -254.42555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &372885854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372885852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd1f7adfba549845825587595fa2885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHp: 0
+  playerHp: 0
 --- !u!1 &377233438
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,7 +1412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &862061009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1808,14 +1865,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224287611}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load3F
-        m_Mode: 1
+        m_MethodName: SetHp
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 6F
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &984133884
@@ -2020,14 +2077,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224287611}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load2F
-        m_Mode: 1
+        m_MethodName: SetHp
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 2F
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1186973283
@@ -2097,10 +2154,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMapName: 
+  startHpScript: {fileID: 372885854}
   listScene: {fileID: 862061009}
-  status: {fileID: 0}
-  bossHpInput: {fileID: 0}
-  playerHpInput: {fileID: 0}
+  status: {fileID: 1799086438}
+  bossHpInput: {fileID: 2022523123}
+  playerHpInput: {fileID: 484174061}
 --- !u!4 &1224287612
 Transform:
   m_ObjectHideFlags: 0
@@ -2200,14 +2259,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224287611}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load3F
-        m_Mode: 1
+        m_MethodName: SetHp
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 3F
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1315188063
@@ -2689,7 +2748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1799086437
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2837,14 +2896,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224287611}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load3F
-        m_Mode: 1
+        m_MethodName: SetHp
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 4F
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1865615864
@@ -3192,14 +3251,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1224287611}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load1F
-        m_Mode: 1
+        m_MethodName: SetHp
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 1F
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2109620162

@@ -6,8 +6,13 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public string loadMapName;
+
+    public StartHpScript startHpScript;
+
     public Image listScene;
     public Image status;
+
     public InputField bossHpInput;
     public InputField playerHpInput;
 
@@ -40,20 +45,18 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
-    public void Load1F()
+    public void SetHp(string mapName)
     {
-        InputDefault("1F");
-        SceneManager.LoadScene("1F");
+        loadMapName = mapName;
+        InputDefault(mapName);
     }
-    public void Load2F()
+
+    public void LoadScene()
     {
-        InputDefault("2F");
-        SceneManager.LoadScene("2F");
-    }
-    public void Load3F()
-    {
-        InputDefault("3F");
-        SceneManager.LoadScene("3F");
+        startHpScript.bossHp = int.Parse(bossHpInput.text);
+        startHpScript.playerHp = int.Parse(playerHpInput.text);
+
+        SceneManager.LoadScene(loadMapName);
     }
 
     //종료하기

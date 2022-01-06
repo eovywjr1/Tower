@@ -8,6 +8,8 @@ public class DamagedScript : MonoBehaviour
 
     public bool isDie;
 
+    public StartHpScript startHpScript;
+
     public virtual void Ondamaged(int power)
     {
         currentHp -= power;

@@ -31,10 +31,13 @@ public class PlayerScript : DamagedScript
 
     public void Awake()
     {
+        startHpScript = FindObjectOfType<StartHpScript>();
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         attackCollider = attackObject.GetComponent<BoxCollider2D>();
+
+        currentHp = startHpScript.playerHp;
     }
 
     private void Update()

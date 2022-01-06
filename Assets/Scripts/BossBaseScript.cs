@@ -14,6 +14,15 @@ public class BossBaseScript : DamagedScript
     public UiManager uiManager;
     public PlayerScript playerScript;
 
+    private void Start()
+    {
+        startHpScript = FindObjectOfType<StartHpScript>();
+        playerScript = FindObjectOfType<PlayerScript>();
+
+        maxHp = startHpScript.bossHp;
+        currentHp = maxHp;
+    }
+
     public void JudgeDie()
     {
         if (isDie)
