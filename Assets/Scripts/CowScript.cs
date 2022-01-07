@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class CowScript : BossBaseScript
 {
-    public int random;
-    public int feedIndex;
+    public int random, feedIndex;
 
     public float speed;
 
-    public GameObject line;
-    public GameObject circle;
-    public GameObject dung;
+    public GameObject line, circle, dung;
     public GameObject[] feed;
     public LineRenderer[] directionRenderer;
     public LineRenderer lineRenderer;
 
-    public bool isPattern;
-    public bool isDash;
-    public bool isPushDown;
-    public bool isGoToFeed;
+    public bool isPattern, isDash, isPushDown, isGoToFeed;
 
     public void Update()
     {
@@ -30,16 +24,18 @@ public class CowScript : BossBaseScript
         }
 
         JudgeDie();
+
         if (isDash)
+        {
             Dash();
 
-        //대쉬 후 위치 같으면 종료
-        if (isDash && transform.position.x == playerPosition.x
-            && transform.position.y == playerPosition.y)
-        {
-            isPattern = false;
-            isDash = false;
-            gameObject.layer = 6;
+            //대쉬 후 위치 같으면 종료
+            if (transform.position == playerPosition)
+            {
+                isPattern = false;
+                isDash = false;
+                gameObject.layer = 6;
+            }
         }
 
         if(isPattern && isGoToFeed)
@@ -60,20 +56,26 @@ public class CowScript : BossBaseScript
         gameObject.layer = 7;
     }
 
+    void PossibleDash()
+    {
+        line.SetActive(false);
+        isDash = true;
+    }
+
     //돌진 전 선 긋기
     void DrawDashLine()
     {
         line.SetActive(true);
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, playerPosition);
-        StartCoroutine(StartDashDelay());
+        StartCoroutine(ExecuteMethodCorutine(0.5f, PossibleDash));
     }
 
     void CircleActive()
     {
         circle.transform.position = playerPosition;
         circle.SetActive(true);
-        StartCoroutine(PushDownCoolTime());
+        StartCoroutine(ExecuteMethodCorutine(1f, PushDown));
     }
 
     void PushDown()
@@ -103,7 +105,7 @@ public class CowScript : BossBaseScript
                     break;
             }
         }
-        StartCoroutine(PushDownEndTime());
+        StartCoroutine(ExecuteMethodCorutine(0.5f, EndDown));
     }
 
     void Dung()
@@ -111,7 +113,7 @@ public class CowScript : BossBaseScript
         isBossDamagePossible = false;
         isPattern = false;
         dung.SetActive(true);
-        StartCoroutine(DungEndTime());
+        StartCoroutine(ExecuteMethodCorutine(10f, EndDung));
     }
 
     void EndDung()
@@ -128,11 +130,16 @@ public class CowScript : BossBaseScript
         gameObject.layer = 6;
     }
 
-    void StartFeed()
+    void ReadyFeed()
     {
         for (int i = 0; i < feed.Length; i++)
             feed[i].SetActive(true);
-        StartCoroutine(FeedStartTime());
+        StartCoroutine(ExecuteMethodCorutine(5f, StartFeed));
+    }
+
+    void StartFeed()
+    {
+        isGoToFeed = true;
     }
 
     void GoToFeed(int index)
@@ -154,71 +161,37 @@ public class CowScript : BossBaseScript
             currentHp = maxHp;
     }
 
-    //선 그은 후 돌진 쿨타임
-    IEnumerator StartDashDelay()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-
-        line.SetActive(false);
-        isDash = true;
-    }
-
     IEnumerator PatternCooltime()
     {
         yield return new WaitForSecondsRealtime(3f);
 
-        playerPosition = playerScript.transform.position;
-
-        int startindex = 0;
-
-        if (currentHp == maxHp)
-            startindex = 1;
-        if (random != 3)
-            random = Random.Range(startindex, 4);
-        else
-            random = Random.Range(startindex, 3);
-        switch (random)
+        if (!playerScript.isDie)
         {
-            case 0:
-                StartFeed();
-                break;
-            case 1:
-                CircleActive();
-                break;
-            case 2:
-                DrawDashLine();
-                break;
-            case 3:
-                Dung();
-                break;
+            playerPosition = playerScript.transform.position;
+
+            int startindex = 0;
+
+            if (currentHp == maxHp)
+                startindex = 1;
+            if (random != 3)
+                random = Random.Range(startindex, 4);
+            else
+                random = Random.Range(startindex, 3);
+            switch (random)
+            {
+                case 0:
+                    StartFeed();
+                    break;
+                case 1:
+                    CircleActive();
+                    break;
+                case 2:
+                    DrawDashLine();
+                    break;
+                case 3:
+                    Dung();
+                    break;
+            }
         }
-    }
-
-    IEnumerator PushDownCoolTime()
-    {
-        yield return new WaitForSecondsRealtime(1f);
-
-        PushDown();
-    }
-
-    IEnumerator PushDownEndTime()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-
-        EndDown();
-    }
-
-    IEnumerator DungEndTime()
-    {
-        yield return new WaitForSecondsRealtime(10f);
-
-        EndDung();
-    }
-
-    IEnumerator FeedStartTime()
-    {
-        yield return new WaitForSecondsRealtime(5f);
-
-        isGoToFeed = true;
     }
 }

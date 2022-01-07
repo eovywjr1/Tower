@@ -14,7 +14,7 @@ public class BossBaseScript : DamagedScript
     public UiManager uiManager;
     public PlayerScript playerScript;
 
-    private void Start()
+    public void Awake()
     {
         startHpScript = FindObjectOfType<StartHpScript>();
         playerScript = FindObjectOfType<PlayerScript>();
@@ -32,10 +32,11 @@ public class BossBaseScript : DamagedScript
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
         if (isBossDamagePossible && collision.CompareTag("PlayerAttack"))
         {
+            playerScript.attackCollider.enabled = false;
             Ondamaged(playerScript.power);
             JudgeDie();
         }

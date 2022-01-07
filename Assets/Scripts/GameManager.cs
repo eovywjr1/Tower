@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         startHpScript.bossHp = int.Parse(bossHpInput.text);
         startHpScript.playerHp = int.Parse(playerHpInput.text);
 
-        SceneManager.LoadScene(loadMapName);
+        MapChange();
     }
 
     //종료하기
@@ -67,17 +67,6 @@ public class GameManager : MonoBehaviour
 
     public void MapChange()
     {
-        string currentMapName = SceneManager.GetActiveScene().name;
-
-        switch (currentMapName)
-        {
-            //1층 클리어
-            case "1F":
-                SceneManager.LoadScene("2F");
-                break;
-            case "2F":
-                SceneManager.LoadScene("3F");
-                break;
-        }
+        SceneManager.LoadScene(loadMapName);
     }
 }

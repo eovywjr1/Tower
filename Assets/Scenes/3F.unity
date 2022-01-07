@@ -319,12 +319,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 10
   isDie: 0
+  startHpScript: {fileID: 0}
   maxHp: 10
   isStart: 0
   isBossDamagePossible: 1
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 1569316520}
-  playerScript: {fileID: 943616768}
+  playerScript: {fileID: 0}
   random: 0
   wind: {fileID: 1710480217}
   scratch: {fileID: 1270196361}
@@ -624,7 +625,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMapName: 4F
+  startHpScript: {fileID: 0}
   listScene: {fileID: 0}
+  status: {fileID: 0}
+  bossHpInput: {fileID: 0}
+  playerHpInput: {fileID: 0}
 --- !u!4 &365613415
 Transform:
   m_ObjectHideFlags: 0
@@ -1209,7 +1215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 689919247}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.81, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 804476990}
@@ -2476,13 +2482,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 5
   isDie: 0
+  startHpScript: {fileID: 0}
   power: 2
   talkId: 60
   horizontal: 0
   vertical: 0
   moveSpeed: 3
   attackSpeed: 0.5
-  attackAnimationSpeed: 1
+  attackAnimationSpeed: 1.2
   isHorizentalDown: 0
   isVerticalDown: 0
   isTalk: 0
@@ -3664,7 +3671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &1599822283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3704,6 +3711,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 943616772}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1681134489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1681134491}
+  - component: {fileID: 1681134490}
+  m_Layer: 0
+  m_Name: StartHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1681134490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681134489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd1f7adfba549845825587595fa2885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHp: 100
+  playerHp: 5
+--- !u!4 &1681134491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681134489}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.5913, y: 74.16187, z: -254.42555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1710480217
 GameObject:

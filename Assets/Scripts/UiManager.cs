@@ -25,8 +25,10 @@ public class UiManager : MonoBehaviour
     private void Awake()
     {
         talkIndex = 0;
+
         playerScript = FindObjectOfType<PlayerScript>();
         talkManager = FindObjectOfType<TalkManager>();
+
         FirstTalkShow();
     }
 

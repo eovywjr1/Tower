@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadMapName: 
+  loadMapName: 5F
   startHpScript: {fileID: 0}
   listScene: {fileID: 0}
   status: {fileID: 0}
@@ -301,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152320740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1689784767}
@@ -932,6 +932,51 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &165202495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165202497}
+  - component: {fileID: 165202496}
+  m_Layer: 0
+  m_Name: StartHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &165202496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165202495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd1f7adfba549845825587595fa2885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHp: 2
+  playerHp: 2
+--- !u!4 &165202497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165202495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.5913, y: 74.16187, z: -254.42555}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &195720790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1098,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1211925775}
-  timeMax: 5
+  playerScript: {fileID: 492711612}
+  uiManager: {fileID: 1299834686}
+  timeMax: 30
   timeCurrent: 0
   isEnd: 0
 --- !u!1 &240965087
@@ -1479,12 +1526,12 @@ MonoBehaviour:
   isDie: 0
   startHpScript: {fileID: 0}
   power: 2
-  talkId: 60
+  talkId: 80
   horizontal: 0
   vertical: 0
   moveSpeed: 3
   attackSpeed: 0.5
-  attackAnimationSpeed: 1
+  attackAnimationSpeed: 1.2
   isHorizentalDown: 0
   isVerticalDown: 0
   isTalk: 0
@@ -3251,7 +3298,7 @@ GameObject:
   - component: {fileID: 1211925776}
   - component: {fileID: 1211925775}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3280,7 +3327,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 20
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
@@ -3290,7 +3337,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 4.4
+  m_Text: 5
 --- !u!222 &1211925776
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3306,7 +3353,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1211925774}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3315,8 +3362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 132.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 212, y: 133}
+  m_SizeDelta: {x: 100, y: 29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1235061061
 GameObject:
@@ -4200,7 +4247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0decc8dc78c0b8440bcecd0e8c63379f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tigerScript: {fileID: 1628125376}
+  tigerScript: {fileID: 0}
 --- !u!61 &1578950379
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4256,7 +4303,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628125375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb724c9ce73059840b6c63d76f3ceda8, type: 3}
+  m_Script: {fileID: 11500000, guid: df3559ddd301d6945b9f3dd128550bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentHp: 10
@@ -4268,14 +4315,8 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 1299834686}
   playerScript: {fileID: 492711612}
-  random: 0
-  wind: {fileID: 564598683}
-  scratch: {fileID: 1444244951}
-  bite: {fileID: 1075761368}
-  biteFindTarget: {fileID: 1578950376}
-  reverseDirection: {x: 0, y: 0, z: 0}
-  rigidBody: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  moveSpeed: 5
+  direction: {x: 0, y: 0, z: 0}
 --- !u!212 &1628125377
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4316,7 +4357,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a7033d9c6f60f9d40b9c9205f4fa23a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 51db2d3968aad0846834cdccb6132d7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4365,7 +4406,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.26, y: 1.41}
+    oldSize: {x: 0.61, y: 1.07}
     newSize: {x: 3.05, y: 1.65}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

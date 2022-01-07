@@ -6,10 +6,7 @@ public class TigerScript : BossBaseScript
 {
     public int random;
 
-    public GameObject wind;
-    public GameObject scratch;
-    public GameObject bite;
-    public GameObject biteFindTarget;
+    public GameObject wind, scratch, bite, biteFindTarget;
     public Vector3 reverseDirection;
     public Rigidbody2D rigidBody;
     public SpriteRenderer spriteRenderer;
@@ -46,7 +43,7 @@ public class TigerScript : BossBaseScript
     {
         FindReverseDirection();
         rigidBody.velocity = reverseDirection * 5;
-        StartCoroutine(PatternStopCorutine(0.25f, BackStepStop));
+        StartCoroutine(ExecuteMethodCorutine(0.25f, BackStepStop));
     }
 
     void BackStepStop()
@@ -85,7 +82,7 @@ public class TigerScript : BossBaseScript
         wind.SetActive(true);
         ObjectArrange(wind, 6, 1, 0);
 
-        StartCoroutine(PatternStopCorutine(1f, CryStop));
+        StartCoroutine(ExecuteMethodCorutine(1f, CryStop));
     }
 
     void CryStop()
@@ -100,7 +97,7 @@ public class TigerScript : BossBaseScript
         scratch.SetActive(true);
         FindReverseDirection();
         ObjectArrange(scratch, 3, 0, 220);
-        StartCoroutine(PatternStopCorutine(0.5f, ScratchStop));
+        StartCoroutine(ExecuteMethodCorutine(0.5f, ScratchStop));
     }
 
     void ScratchStop()
@@ -129,7 +126,7 @@ public class TigerScript : BossBaseScript
         biteFindTarget.SetActive(false);
         bite.SetActive(true);
         bite.transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f);
-        StartCoroutine(PatternStopCorutine(0.5f, BiteStop));
+        StartCoroutine(ExecuteMethodCorutine(0.5f, BiteStop));
     }
 
     void BiteStop()
@@ -159,13 +156,6 @@ public class TigerScript : BossBaseScript
                     break;
             }
         }
-    }
-
-    IEnumerator PatternStopCorutine(float time, System.Action action)
-    {
-        yield return new WaitForSecondsRealtime(time);
-
-        action();
     }
 
     IEnumerator PatternStartCorutine(Color startColor, float time, System.Action action)

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class TimerManager : MonoBehaviour
 {
     public Text timerText;
+    public PlayerScript playerScript;
+    public UiManager uiManager;
     public float timeMax, timeCurrent;
     public bool isEnd;
 
@@ -44,6 +46,8 @@ public class TimerManager : MonoBehaviour
     {
         timeCurrent = 0;
         timerText.text = $"{timeCurrent:N1}";
+        playerScript.isDie = true;
+        uiManager.PlayerDiedShowText();
         isEnd = true;
     }
 }

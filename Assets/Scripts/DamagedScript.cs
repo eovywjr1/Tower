@@ -19,4 +19,11 @@ public class DamagedScript : MonoBehaviour
             isDie = true;
         }
     }
+
+    public IEnumerator ExecuteMethodCorutine(float time, System.Action action)
+    {
+        yield return new WaitForSecondsRealtime(time);
+
+        action();
+    }
 }

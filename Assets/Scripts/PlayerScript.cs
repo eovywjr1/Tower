@@ -4,19 +4,14 @@ using UnityEngine;
 
 public class PlayerScript : DamagedScript
 {
-    public int power;
-    public int talkId;
+    public int power, talkId;
 
-    public float horizontal, vertical;
-    public float moveSpeed;
+    public float horizontal, vertical, moveSpeed;
     public float attackSpeed = 0.5f;
     public float attackAnimationSpeed = 1f;
 
-    public bool isHorizentalDown, isVerticalDown;
-    public bool isTalk, isDamaged;
-    public bool isAttackDelay, isAvoidanceDelay;
-    public bool isAvoidancePossible;
-    public bool isFaint;
+    public bool isHorizentalDown, isVerticalDown, isTalk, isDamaged, isAttackDelay, isAvoidanceDelay;
+    public bool isAvoidancePossible, isFaint;
 
     public Vector2 moveDireciton;
 
@@ -25,7 +20,7 @@ public class PlayerScript : DamagedScript
     Animator animator;
 
     public GameObject attackObject;
-    BoxCollider2D attackCollider;
+    public BoxCollider2D attackCollider;
 
     public UiManager uiManager;
 
@@ -48,6 +43,11 @@ public class PlayerScript : DamagedScript
 
             if (!isDie && !isFaint)
             {
+                if (isAvoidancePossible && !isAvoidanceDelay)
+                {
+                    if (Input.GetKey(KeyCode.Space))
+                        Avoidance();
+                }
                 if (!isAttackDelay)
                 {
                     if (Input.GetKey(KeyCode.LeftControl))
@@ -55,18 +55,17 @@ public class PlayerScript : DamagedScript
                     MoveDirection();
                     FlipChange();
                 }
-
-                if (!isAvoidanceDelay && isAvoidancePossible)
-                {
-                    if (Input.GetKey(KeyCode.Space))
-                        Avoidance();
-                }
+                else
+                    Stop();
             }
             else
                 Stop();
         }
         else
+        {
             animator.SetBool("isState", true);
+            Stop();
+        }
     }
 
     private void FixedUpdate()
@@ -89,7 +88,7 @@ public class PlayerScript : DamagedScript
 
         isDamaged = true;
         spriteRenderer.color = Color.red;
-        StartCoroutine(PatternStopCorutine(1f, DamagedStop));
+        StartCoroutine(ExecuteMethodCorutine(1f, DamagedStop));
     }
 
     void DamagedStop()
@@ -150,13 +149,24 @@ public class PlayerScript : DamagedScript
     //기본공격 함수
     void Attack()
     {
+        Debug.Log("Attack");
         isAttackDelay = true;
         animator.SetFloat("AttackSpeed", attackAnimationSpeed); //attackSpeed 0.1 감소 >> attackAnimationSpeed 0.2 증가
         animator.SetBool("isAttack", true);
-        attackObject.SetActive(true);
+        attackCollider.enabled = true;
 
-        StartCoroutine(AttackAnimationFalseCorutine());
-        StartCoroutine(AttackDelay());
+        StartCoroutine(ExecuteMethodCorutine(0.01f, UnAttackAnimation));
+    }
+
+    void UnAttack()
+    {
+        attackCollider.enabled = false;
+        isAttackDelay = false;
+    }
+
+    void UnAttackAnimation()
+    {
+        animator.SetBool("isAttack", false);
     }
 
     //회피 함수
@@ -164,7 +174,12 @@ public class PlayerScript : DamagedScript
     {
         isAvoidanceDelay = true;
         this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 2, transform.position.y + vertical * 2);
-        StartCoroutine(AvoidanceDelay());
+        StartCoroutine(ExecuteMethodCorutine(5f, UnAvoidance));
+    }
+
+    void UnAvoidance()
+    {
+        isAvoidanceDelay = false;
     }
 
     public bool JudgeDie()
@@ -182,47 +197,12 @@ public class PlayerScript : DamagedScript
     public void Faint()
     {
         isFaint = true;
-        StartCoroutine(PatternStopCorutine(1f, UnFaint));
+        StartCoroutine(ExecuteMethodCorutine(1f, UnFaint));
     }
 
     void UnFaint()
     {
         isFaint = false;
-    }
-
-    IEnumerator PatternStopCorutine(float time, System.Action action)
-    {
-        yield return new WaitForSecondsRealtime(time);
-
-        action();
-    }
-
-    //기본공격 딜레이 코루틴
-    IEnumerator AttackDelay()
-    {
-        yield return new WaitForSecondsRealtime(attackSpeed);
-
-        isAttackDelay = false;
-        attackObject.SetActive(false);
-    }
-
-    IEnumerator AvoidanceDelay()
-    {
-        yield return new WaitForSecondsRealtime(5f);
-
-        isAvoidanceDelay = false;
-    }
-
-    IEnumerator Damaged()
-    {
-        yield return new WaitForSecondsRealtime(1f);
-    }
-
-    IEnumerator AttackAnimationFalseCorutine()
-    {
-        yield return new WaitForSecondsRealtime(0.01f);
-
-        animator.SetBool("isAttack", false);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

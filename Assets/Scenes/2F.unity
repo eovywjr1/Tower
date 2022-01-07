@@ -672,6 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 5
   isDie: 0
+  startHpScript: {fileID: 0}
   maxHp: 5
   isStart: 0
   isBossDamagePossible: 1
@@ -911,7 +912,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadMapName: 3F
+  startHpScript: {fileID: 0}
   listScene: {fileID: 0}
+  status: {fileID: 0}
+  bossHpInput: {fileID: 0}
+  playerHpInput: {fileID: 0}
 --- !u!1 &412576721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
+  startHpScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
@@ -2861,6 +2868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
+  startHpScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
@@ -8334,6 +8342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
+  startHpScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
@@ -9534,6 +9543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 0
   isDie: 0
+  startHpScript: {fileID: 0}
   maxHp: 0
   isStart: 0
   isBossDamagePossible: 1
@@ -9595,13 +9605,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHp: 5
   isDie: 0
+  startHpScript: {fileID: 0}
   power: 2
   talkId: 40
   horizontal: 0
   vertical: 0
   moveSpeed: 3
   attackSpeed: 0.5
-  attackAnimationSpeed: 1
+  attackAnimationSpeed: 1.2
   isHorizentalDown: 0
   isVerticalDown: 0
   isTalk: 0
