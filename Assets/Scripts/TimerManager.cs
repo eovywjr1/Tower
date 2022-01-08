@@ -9,19 +9,20 @@ public class TimerManager : MonoBehaviour
     public PlayerScript playerScript;
     public UiManager uiManager;
     public float timeMax, timeCurrent;
-    public bool isEnd;
+    public bool isStart, isEnd;
 
     void Start()
     {
         ResetTimer();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isEnd)
             return;
-        UpdateTimer();
+
+        if (isStart)
+            UpdateTimer();
     }
 
     void ResetTimer()

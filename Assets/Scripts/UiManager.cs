@@ -10,6 +10,7 @@ public class UiManager : MonoBehaviour
 
     public Image talkImage;
     public Image diedImage;
+    public Image hpImage;
 
     public Text talkText;
     public Text bossHpText;
@@ -18,6 +19,7 @@ public class UiManager : MonoBehaviour
     public GameObject hpGroup;
 
     public GameManager gameManager;
+    public TimerManager timerManager;
     public BossBaseScript bossBaseScript;
     PlayerScript playerScript;
     TalkManager talkManager;
@@ -64,6 +66,9 @@ public class UiManager : MonoBehaviour
                 hpGroup.SetActive(true);
                 bossBaseScript.gameObject.SetActive(true);
                 bossBaseScript.isStart = true;
+
+                if (playerScript.talkId == 90)
+                    timerManager.isStart = true;
             }
 
             else if (playerScript.talkId > 20 && playerScript.talkId % 20 == 0)
@@ -81,9 +86,12 @@ public class UiManager : MonoBehaviour
         if (hpGroup.activeSelf)
         {
             if (!bossBaseScript.isDie)
+            {
                 bossHpText.text = bossBaseScript.currentHp + " / " + bossBaseScript.maxHp;
+                hpImage.fillAmount = bossBaseScript.currentHp / bossBaseScript.maxHp;
+            }
             else
-                bossHpText.text = 0 + " / " + bossBaseScript.maxHp;
+                hpGroup.SetActive(false);
         }
     }
 
@@ -92,20 +100,8 @@ public class UiManager : MonoBehaviour
         playerHpText.text = "¢¾ x " + playerScript.currentHp;
     }
 
-    public void StartEndCoolTime()
-    {
-        StartCoroutine(EndCoolTime());
-    }
-
     public void PlayerDiedShowText()
     {
         diedImage.gameObject.SetActive(true);
-    }
-
-    IEnumerator EndCoolTime()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-
-        FirstTalkShow();
     }
 }

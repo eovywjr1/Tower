@@ -28,15 +28,14 @@ public class BossBaseScript : DamagedScript
         if (isDie)
         {
             gameObject.SetActive(false);
-            uiManager.StartEndCoolTime();
+            StartCoroutine(ExecuteMethodCorutine(0.5f, uiManager.FirstTalkShow));
         }
     }
 
-    public void OnTriggerStay2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (isBossDamagePossible && collision.CompareTag("PlayerAttack"))
         {
-            playerScript.attackCollider.enabled = false;
             Ondamaged(playerScript.power);
             JudgeDie();
         }

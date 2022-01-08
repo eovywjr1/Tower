@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeedScript : BossBaseScript
+public class FeedScript : DamagedScript
 {
     public CowScript cow;
 

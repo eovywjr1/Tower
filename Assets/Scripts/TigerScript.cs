@@ -125,7 +125,6 @@ public class TigerScript : BossBaseScript
     {
         biteFindTarget.SetActive(false);
         bite.SetActive(true);
-        bite.transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f);
         StartCoroutine(ExecuteMethodCorutine(0.5f, BiteStop));
     }
 

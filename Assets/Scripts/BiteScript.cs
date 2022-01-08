@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class BiteScript : MonoBehaviour
 {
-    public TigerScript tigerScript;
+    public PlayerScript playerScript;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Update()
     {
-        if (collision.CompareTag("Player"))
-        {
-            tigerScript.Bite();
-        }
+        Vector3 playerPosition = playerScript.transform.position;
+
+        transform.position = new Vector3(playerPosition.x, playerPosition.y + 1.5f);
     }
 }

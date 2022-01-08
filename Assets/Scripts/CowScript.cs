@@ -38,7 +38,7 @@ public class CowScript : BossBaseScript
             }
         }
 
-        if(isPattern && isGoToFeed)
+        if(isGoToFeed)
         {
             if (feedIndex > 3)
                 EndFeed();

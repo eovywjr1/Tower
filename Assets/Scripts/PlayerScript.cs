@@ -27,6 +27,7 @@ public class PlayerScript : DamagedScript
     public void Awake()
     {
         startHpScript = FindObjectOfType<StartHpScript>();
+
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -70,7 +71,8 @@ public class PlayerScript : DamagedScript
 
     private void FixedUpdate()
     {
-        Move();
+        if (!isTalk && !isAttackDelay && !isFaint && !isDie)
+            Move();
     }
 
     void Stop()
@@ -124,8 +126,7 @@ public class PlayerScript : DamagedScript
     //대화 중 움직임 x
     void Move()
     {
-        if (!isTalk && !isAttackDelay && !isFaint)
-            rigidBody.velocity = moveDireciton * moveSpeed;
+        rigidBody.velocity = moveDireciton * moveSpeed;
     }
 
     //방향 전환
@@ -149,19 +150,22 @@ public class PlayerScript : DamagedScript
     //기본공격 함수
     void Attack()
     {
-        Debug.Log("Attack");
         isAttackDelay = true;
         animator.SetFloat("AttackSpeed", attackAnimationSpeed); //attackSpeed 0.1 감소 >> attackAnimationSpeed 0.2 증가
         animator.SetBool("isAttack", true);
-        attackCollider.enabled = true;
+        attackObject.transform.position = transform.position;
 
         StartCoroutine(ExecuteMethodCorutine(0.01f, UnAttackAnimation));
     }
 
     void UnAttack()
     {
-        attackCollider.enabled = false;
         isAttackDelay = false;
+    }
+
+    public void ChangeAttackPosition()
+    {
+        attackObject.transform.position = new Vector3(100, 100);
     }
 
     void UnAttackAnimation()

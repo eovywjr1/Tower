@@ -5,12 +5,18 @@ using UnityEngine;
 public class RabbitScript : BossBaseScript
 {
     public float moveSpeed;
-
     public Vector3 direction;
+    public bool isMove;
 
     void Start()
     {
-        StartCoroutine(PatternCoolTime());
+        StartMove();
+    }
+
+    void FixedUpdate()
+    {
+        if (isMove)
+            Move();
     }
 
     void RandomDirection()
@@ -36,17 +42,19 @@ public class RabbitScript : BossBaseScript
 
     void Move()
     {
-        RandomDirection();
-
         transform.Translate(direction * moveSpeed * Time.deltaTime);
-
-        StartCoroutine(PatternCoolTime());
     }
 
-    IEnumerator PatternCoolTime()
+    void StartMove()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        isMove = true;
+        RandomDirection();
+        StartCoroutine(ExecuteMethodCorutine(1f, EndMove));
+    }
 
-        Move();
+    void EndMove()
+    {
+        isMove = false;
+        StartCoroutine(ExecuteMethodCorutine(1f, StartMove));
     }
 }
