@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossBaseScript : DamagedScript
 {
-    public int maxHp;
+    public int maxHp, patternIndex;
 
     public bool isStart;
     public bool isBossDamagePossible = true;
@@ -18,6 +18,7 @@ public class BossBaseScript : DamagedScript
     {
         startHpScript = FindObjectOfType<StartHpScript>();
         playerScript = FindObjectOfType<PlayerScript>();
+        uiManager = FindObjectOfType<UiManager>();
 
         maxHp = startHpScript.bossHp;
         currentHp = maxHp;
@@ -27,8 +28,8 @@ public class BossBaseScript : DamagedScript
     {
         if (isDie)
         {
+            uiManager.FirstTalkShow();
             gameObject.SetActive(false);
-            StartCoroutine(ExecuteMethodCorutine(0.5f, uiManager.FirstTalkShow));
         }
     }
 

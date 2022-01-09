@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CowScript : BossBaseScript
 {
-    public int random, feedIndex;
+    public int feedIndex;
 
     public float speed;
 
@@ -173,11 +173,11 @@ public class CowScript : BossBaseScript
 
             if (currentHp == maxHp)
                 startindex = 1;
-            if (random != 3)
-                random = Random.Range(startindex, 4);
+            if (patternIndex != 3)
+                patternIndex = Random.Range(startindex, 4);
             else
-                random = Random.Range(startindex, 3);
-            switch (random)
+                patternIndex = Random.Range(startindex, 3);
+            switch (patternIndex)
             {
                 case 0:
                     StartFeed();

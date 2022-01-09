@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TigerScript : BossBaseScript
 {
-    public int random;
-
     public GameObject wind, scratch, bite, biteFindTarget;
     public Vector3 reverseDirection;
     public Rigidbody2D rigidBody;
@@ -141,8 +139,8 @@ public class TigerScript : BossBaseScript
         {
             playerPosition = playerScript.transform.position;
 
-            random = Random.Range(0, 3);
-            switch (random)
+            patternIndex = Random.Range(0, 3);
+            switch (patternIndex)
             {
                 case 0:
                     BackStep();

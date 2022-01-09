@@ -88,7 +88,7 @@ public class UiManager : MonoBehaviour
             if (!bossBaseScript.isDie)
             {
                 bossHpText.text = bossBaseScript.currentHp + " / " + bossBaseScript.maxHp;
-                hpImage.fillAmount = bossBaseScript.currentHp / bossBaseScript.maxHp;
+                hpImage.fillAmount = bossBaseScript.currentHp / (float) bossBaseScript.maxHp;
             }
             else
                 hpGroup.SetActive(false);
