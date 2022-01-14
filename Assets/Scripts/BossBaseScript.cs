@@ -6,7 +6,6 @@ public class BossBaseScript : DamagedScript
 {
     public int maxHp, patternIndex;
 
-    public bool isStart;
     public bool isBossDamagePossible = true;
 
     public Vector3 playerPosition;
@@ -19,6 +18,7 @@ public class BossBaseScript : DamagedScript
         startHpScript = FindObjectOfType<StartHpScript>();
         playerScript = FindObjectOfType<PlayerScript>();
         uiManager = FindObjectOfType<UiManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         maxHp = startHpScript.bossHp;
         currentHp = maxHp;
@@ -40,5 +40,20 @@ public class BossBaseScript : DamagedScript
             Ondamaged(playerScript.power);
             JudgeDie();
         }
+    }
+
+    public IEnumerator PatternStartCorutine(Color startColor, float time, System.Action action)
+    {
+        spriteRenderer.color = startColor;
+
+        yield return new WaitForSecondsRealtime(time);
+
+        spriteRenderer.color = Color.white;
+        action();
+    }
+
+    public void PlayerDiedAllStop()
+    { 
+        StopAllCoroutines();
     }
 }

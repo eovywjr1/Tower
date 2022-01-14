@@ -16,17 +16,18 @@ public class PlayerScript : DamagedScript
     public Vector2 moveDireciton;
 
     Rigidbody2D rigidBody;
-    SpriteRenderer spriteRenderer;
     Animator animator;
 
     public GameObject attackObject;
     public BoxCollider2D attackCollider;
 
     public UiManager uiManager;
+    BossBaseScript bossBaseScript;
 
     public void Awake()
     {
         startHpScript = FindObjectOfType<StartHpScript>();
+        bossBaseScript = FindObjectOfType<BossBaseScript>();
 
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -86,7 +87,10 @@ public class PlayerScript : DamagedScript
         if (!isDamaged)
             Ondamaged(power);
         if (JudgeDie())
+        {
+            bossBaseScript.PlayerDiedAllStop();
             return;
+        }
 
         isDamaged = true;
         spriteRenderer.color = Color.red;
@@ -209,8 +213,9 @@ public class PlayerScript : DamagedScript
         isFaint = false;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log(collision.name);
         if (!isDamaged)
         {
             if (collision.gameObject.layer == 7)

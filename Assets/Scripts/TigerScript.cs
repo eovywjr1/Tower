@@ -7,7 +7,6 @@ public class TigerScript : BossBaseScript
     public GameObject wind, scratch, bite, biteFindTarget;
     public Vector3 reverseDirection;
     public Rigidbody2D rigidBody;
-    public SpriteRenderer spriteRenderer;
 
     private void Start()
     {
@@ -135,33 +134,21 @@ public class TigerScript : BossBaseScript
     {
         yield return new WaitForSecondsRealtime(3f);
 
-        if (!playerScript.isDie)
+        playerPosition = playerScript.transform.position;
+
+        patternIndex = Random.Range(0, 3);
+        switch (patternIndex)
         {
-            playerPosition = playerScript.transform.position;
-
-            patternIndex = Random.Range(0, 3);
-            switch (patternIndex)
-            {
-                case 0:
-                    BackStep();
-                    break;
-                case 1:
-                    StartCoroutine(PatternStartCorutine(Color.red, 1f, Scratch));
-                    break;
-                case 2:
-                    StartCoroutine(PatternStartCorutine(Color.red, 1f, BiteFindTargetStart));
-                    break;
-            }
+            case 0:
+                BackStep();
+                break;
+            case 1:
+                StartCoroutine(PatternStartCorutine(Color.red, 1f, Scratch));
+                break;
+            case 2:
+                StartCoroutine(PatternStartCorutine(Color.red, 1f, BiteFindTargetStart));
+                break;
         }
-    }
 
-    IEnumerator PatternStartCorutine(Color startColor, float time, System.Action action)
-    {
-        spriteRenderer.color = startColor;
-
-        yield return new WaitForSecondsRealtime(time);
-
-        spriteRenderer.color = Color.white;
-        action();
     }
 }

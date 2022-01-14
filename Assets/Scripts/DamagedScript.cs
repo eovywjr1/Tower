@@ -10,6 +10,8 @@ public class DamagedScript : MonoBehaviour
 
     public StartHpScript startHpScript;
 
+    public SpriteRenderer spriteRenderer;
+
     public virtual void Ondamaged(int power)
     {
         currentHp -= power;

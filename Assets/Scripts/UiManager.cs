@@ -65,7 +65,6 @@ public class UiManager : MonoBehaviour
             {
                 hpGroup.SetActive(true);
                 bossBaseScript.gameObject.SetActive(true);
-                bossBaseScript.isStart = true;
 
                 if (playerScript.talkId == 90)
                     timerManager.isStart = true;

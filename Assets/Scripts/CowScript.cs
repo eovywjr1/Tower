@@ -17,13 +17,11 @@ public class CowScript : BossBaseScript
 
     public void Update()
     {
-        if (isStart && !isPattern)
+        if (!isPattern)
         {
             isPattern = true;
             StartCoroutine(PatternCooltime());
         }
-
-        JudgeDie();
 
         if (isDash)
         {
@@ -165,33 +163,30 @@ public class CowScript : BossBaseScript
     {
         yield return new WaitForSecondsRealtime(3f);
 
-        if (!playerScript.isDie)
+        playerPosition = playerScript.transform.position;
+
+        int startindex = 0;
+
+        if (currentHp == maxHp)
+            startindex = 1;
+        if (patternIndex != 3)
+            patternIndex = Random.Range(startindex, 4);
+        else
+            patternIndex = Random.Range(startindex, 3);
+        switch (patternIndex)
         {
-            playerPosition = playerScript.transform.position;
-
-            int startindex = 0;
-
-            if (currentHp == maxHp)
-                startindex = 1;
-            if (patternIndex != 3)
-                patternIndex = Random.Range(startindex, 4);
-            else
-                patternIndex = Random.Range(startindex, 3);
-            switch (patternIndex)
-            {
-                case 0:
-                    StartFeed();
-                    break;
-                case 1:
-                    CircleActive();
-                    break;
-                case 2:
-                    DrawDashLine();
-                    break;
-                case 3:
-                    Dung();
-                    break;
-            }
+            case 0:
+                StartFeed();
+                break;
+            case 1:
+                CircleActive();
+                break;
+            case 2:
+                DrawDashLine();
+                break;
+            case 3:
+                Dung();
+                break;
         }
     }
 }

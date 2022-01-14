@@ -4313,6 +4313,7 @@ MonoBehaviour:
   currentHp: 5
   isDie: 0
   startHpScript: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   power: 2
   talkId: 100
   horizontal: 0
@@ -5765,14 +5766,17 @@ MonoBehaviour:
   currentHp: 0
   isDie: 0
   startHpScript: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   maxHp: 0
   patternIndex: 0
-  isStart: 0
   isBossDamagePossible: 1
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
   fire: {fileID: 1173910117}
+  fireGround: {fileID: 0}
+  fireGroundPrefab: {fileID: 3398821313037880882, guid: 9fc2fc97bd699484388b197ba7869d1c, type: 3}
+  fireGroundLineRenderer: {fileID: 0}
 --- !u!212 &2045352111
 SpriteRenderer:
   m_ObjectHideFlags: 0
