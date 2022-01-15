@@ -56,16 +56,19 @@ public class DragonScript : BossBaseScript
     //돌진
     void Dash()
     {
+        //boxCollider 크기 및 위치 수정
+        Vector3 center = originPosition + (transform.position - originPosition) / 2;
+        Vector3 differ = new Vector3(Mathf.Abs(transform.position.x - originPosition.x), Mathf.Abs(transform.position.y - originPosition.y));
+
         transform.position = Vector2.MoveTowards(transform.position, playerPosition, Time.deltaTime * dashSpeed);
 
         fireGroundLineRenderer.SetPosition(1, transform.position);
-
-        //boxCollider 크기 및 위치 수정
-        Vector3 center = (transform.position - originPosition) / 2;
-
         fireGroundBoxCollider.offset = center;
-        fireGroundBoxCollider.size = new Vector2(Mathf.Abs(center.x - transform.position.x), Mathf.Abs(center.y - transform.position.y));
-
+        if (differ.x < 1)
+            differ.x = 1;
+        if (differ.y < 1)
+            differ.y = 1;
+        fireGroundBoxCollider.size = differ;
     }
 
     void EndDash()

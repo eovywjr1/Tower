@@ -5,12 +5,16 @@ using UnityEngine;
 public class BiteTargetFindScript : MonoBehaviour
 {
     public TigerScript tigerScript;
+    public SnakeScript snakeScript;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            tigerScript.Bite();
+            if (tigerScript != null)
+                tigerScript.Bite();
+            if (snakeScript != null)
+                snakeScript.Bite();
         }
     }
 }

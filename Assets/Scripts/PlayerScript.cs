@@ -94,7 +94,7 @@ public class PlayerScript : DamagedScript
 
         isDamaged = true;
         spriteRenderer.color = Color.red;
-        StartCoroutine(ExecuteMethodCorutine(1f, DamagedStop));
+        StartCoroutine(ExecuteMethodCorutine(2f, DamagedStop));
     }
 
     void DamagedStop()
@@ -215,7 +215,6 @@ public class PlayerScript : DamagedScript
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (!isDamaged)
         {
             if (collision.gameObject.layer == 7)
