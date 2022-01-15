@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3398821313037880884}
   - component: {fileID: 3398821313037880883}
-  - component: {fileID: 5351275703129131845}
+  - component: {fileID: 8094055505647090931}
   m_Layer: 7
   m_Name: FireGround
   m_TagString: Untagged
@@ -130,7 +130,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!61 &5351275703129131845
+--- !u!61 &8094055505647090931
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
