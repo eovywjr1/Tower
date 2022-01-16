@@ -26,6 +26,8 @@ public class TalkManager : MonoBehaviour
         tutorialData.Add(90, new string[] { "다음 층으로 보내드리겠습니다." });
         tutorialData.Add(100, new string[] { "5층 용 시작하겠습니다." });
         tutorialData.Add(110, new string[] { "다음 층으로 보내드리겠습니다." });
+        tutorialData.Add(120, new string[] { "6층 뱀 시작하겠습니다." });
+        tutorialData.Add(130, new string[] { "다음 층은 없습니다." });
 
     }
 

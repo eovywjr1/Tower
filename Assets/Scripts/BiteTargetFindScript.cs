@@ -14,7 +14,14 @@ public class BiteTargetFindScript : MonoBehaviour
             if (tigerScript != null)
                 tigerScript.Bite();
             if (snakeScript != null)
-                snakeScript.Bite();
+            {
+                if (snakeScript.isBite)
+                    snakeScript.Bite();
+                else if (snakeScript.isTail)
+                    snakeScript.Tail();
+                else if (snakeScript.isTighten)
+                    snakeScript.Tighten();
+            }
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BiteScript : MonoBehaviour
+public class EffectPositionScript : MonoBehaviour
 {
     public PlayerScript playerScript;
 

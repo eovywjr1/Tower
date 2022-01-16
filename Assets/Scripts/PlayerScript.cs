@@ -215,6 +215,7 @@ public class PlayerScript : DamagedScript
 
     public void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log(collision.name);
         if (!isDamaged)
         {
             if (collision.gameObject.layer == 7)
