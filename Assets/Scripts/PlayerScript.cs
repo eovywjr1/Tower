@@ -205,7 +205,7 @@ public class PlayerScript : DamagedScript
     public void Faint()
     {
         isFaint = true;
-        StartCoroutine(ExecuteMethodCorutine(1f, UnFaint));
+        StartCoroutine(ExecuteMethodCorutine(3f, UnFaint));
     }
 
     void UnFaint()

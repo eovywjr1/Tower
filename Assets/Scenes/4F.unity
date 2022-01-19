@@ -252,6 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossHp: 200
+  playerHp: 11
   loadMapName: 5F
   startHpScript: {fileID: 0}
   listScene: {fileID: 0}

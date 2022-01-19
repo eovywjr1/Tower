@@ -6,13 +6,11 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    public int bossHp, playerHp;
     public string loadMapName;
-
     public StartHpScript startHpScript;
-
     public Image listScene;
     public Image status;
-
     public InputField bossHpInput;
     public InputField playerHpInput;
 
@@ -30,12 +28,24 @@ public class GameManager : MonoBehaviour
         {
             case "1F":
             case "2F":
-                bossHpInput.text = "5";
+                bossHpInput.text = "50";
                 playerHpInput.text = "5";
                 break;
             case "3F":
-                bossHpInput.text = "10";
-                playerHpInput.text = "5";
+                bossHpInput.text = "100";
+                playerHpInput.text = "7";
+                break;
+            case "4F":
+                bossHpInput.text = "150";
+                playerHpInput.text = "9";
+                break;
+            case "5F":
+                bossHpInput.text = "200";
+                playerHpInput.text = "11";
+                break;
+            case "6F":
+                bossHpInput.text = "250";
+                playerHpInput.text = "13";
                 break;
         }
     }
@@ -56,7 +66,7 @@ public class GameManager : MonoBehaviour
         startHpScript.bossHp = int.Parse(bossHpInput.text);
         startHpScript.playerHp = int.Parse(playerHpInput.text);
 
-        MapChange();
+        SceneManager.LoadScene(loadMapName);
     }
 
     //종료하기
@@ -67,6 +77,14 @@ public class GameManager : MonoBehaviour
 
     public void MapChange()
     {
+        startHpScript.bossHp = bossHp;
+        startHpScript.playerHp = playerHp;
+
         SceneManager.LoadScene(loadMapName);
+    }
+
+    public void CloseStatus()
+    {
+        status.gameObject.SetActive(false);
     }
 }

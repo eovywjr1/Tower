@@ -2443,7 +2443,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!1 &1722216945
 GameObject:
@@ -3726,6 +3726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1948575711}
   - component: {fileID: 1948575712}
+  - component: {fileID: 1948575713}
   m_Layer: 0
   m_Name: "\uC870\uC774\uAE30"
   m_TagString: Untagged
@@ -3798,6 +3799,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1948575713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948575710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b583b5a6ca72742895ae9353d6ca04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 1240813803}
 --- !u!1 &1954603948
 GameObject:
   m_ObjectHideFlags: 0

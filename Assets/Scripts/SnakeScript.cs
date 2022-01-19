@@ -69,7 +69,7 @@ public class SnakeScript : BossBaseScript
     {
         findTarget.SetActive(false);
         tighten.SetActive(true);
-        StartCoroutine(ExecuteMethodCorutine(0.5f, StopTail));
+        StartCoroutine(ExecuteMethodCorutine(0.5f, StopTighten));
     }
 
     void StopTighten()
@@ -106,7 +106,7 @@ public class SnakeScript : BossBaseScript
 
         playerPosition = playerScript.transform.position;
 
-        patternIndex = Random.Range(0, 3);
+        patternIndex = Random.Range(0, 4);
         switch (patternIndex)
         {
             case 0:

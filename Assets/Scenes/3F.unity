@@ -501,7 +501,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3, y: 3}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &164989008
 MonoBehaviour:
@@ -700,6 +700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc45e37a66011f4db9f3a70b4d6a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossHp: 150
+  playerHp: 9
   loadMapName: 4F
   startHpScript: {fileID: 0}
   listScene: {fileID: 0}
@@ -2528,7 +2530,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
