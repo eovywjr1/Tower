@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHp: 200
-  playerHp: 11
+  playerHp: 9
   loadMapName: 5F
   startHpScript: {fileID: 0}
   listScene: {fileID: 0}
@@ -1102,7 +1102,7 @@ MonoBehaviour:
   timerText: {fileID: 1211925775}
   playerScript: {fileID: 492711612}
   uiManager: {fileID: 1299834686}
-  timeMax: 30
+  timeMax: 40
   timeCurrent: 0
   isStart: 0
   isEnd: 0

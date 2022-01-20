@@ -29,7 +29,7 @@ public class SnakeScript : BossBaseScript
     {
         findTarget.SetActive(true);
         findTarget.transform.position = transform.position;
-        StartCoroutine(PatternStartCorutine(Color.white, 1f, FindTargetStop));
+        StartCoroutine(PatternStartCorutine(Color.white, 0.5f, FindTargetStop));
     }
 
     void FindTargetStop()

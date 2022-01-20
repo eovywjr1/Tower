@@ -98,7 +98,7 @@ public class DragonScript : BossBaseScript
         switch (patternIndex)
         {
             case 0:
-                StartFire();
+                StartCoroutine(PatternStartCorutine(Color.red, 1f, StartFire));
                 break;
             case 1:
                 PrePareDash();

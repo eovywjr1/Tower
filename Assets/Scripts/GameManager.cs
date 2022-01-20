@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     public InputField bossHpInput;
     public InputField playerHpInput;
 
+    private void Start()
+    {
+        startHpScript = FindObjectOfType<StartHpScript>();
+    }
+
     //새로하기
     public void StartGame()
     {
@@ -36,16 +41,16 @@ public class GameManager : MonoBehaviour
                 playerHpInput.text = "7";
                 break;
             case "4F":
-                bossHpInput.text = "150";
-                playerHpInput.text = "9";
+                bossHpInput.text = "100";
+                playerHpInput.text = "7";
                 break;
             case "5F":
                 bossHpInput.text = "200";
-                playerHpInput.text = "11";
+                playerHpInput.text = "9";
                 break;
             case "6F":
                 bossHpInput.text = "250";
-                playerHpInput.text = "13";
+                playerHpInput.text = "10";
                 break;
         }
     }

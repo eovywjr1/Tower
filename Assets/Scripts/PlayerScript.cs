@@ -181,7 +181,7 @@ public class PlayerScript : DamagedScript
     void Avoidance()
     {
         isAvoidanceDelay = true;
-        this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 2, transform.position.y + vertical * 2);
+        this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 4, transform.position.y + vertical * 4);
         StartCoroutine(ExecuteMethodCorutine(5f, UnAvoidance));
     }
 
@@ -205,7 +205,7 @@ public class PlayerScript : DamagedScript
     public void Faint()
     {
         isFaint = true;
-        StartCoroutine(ExecuteMethodCorutine(3f, UnFaint));
+        StartCoroutine(ExecuteMethodCorutine(4f, UnFaint));
     }
 
     void UnFaint()
