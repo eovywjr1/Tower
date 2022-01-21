@@ -215,15 +215,21 @@ public class PlayerScript : DamagedScript
 
     public void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (!isDamaged)
         {
-            if (collision.gameObject.layer == 7)
+            switch (collision.gameObject.layer)
             {
-                PlayerDamaged(1);
+                case 7:
+                    PlayerDamaged(1);
+                    break;
+                case 8:
+                    Faint();
+                    break;
+                case 9:
+                    PlayerDamaged(2);
+                    Destroy(collision.gameObject);
+                    break;
             }
-            else if (collision.gameObject.layer == 8)
-                Faint();
         }
     }
 }

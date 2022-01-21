@@ -68,7 +68,7 @@ public class UiManager : MonoBehaviour
 
                 if (playerScript.talkId == 90)
                     timerManager.isStart = true;
-                else if (playerScript.talkId >= 140)
+                else if (playerScript.talkId == 140)
                     SceneManager.LoadScene("Title");
             }
 

@@ -52,6 +52,10 @@ public class GameManager : MonoBehaviour
                 bossHpInput.text = "250";
                 playerHpInput.text = "10";
                 break;
+            case "7F":
+                bossHpInput.text = "300";
+                playerHpInput.text = "12";
+                break;
         }
     }
 

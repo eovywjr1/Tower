@@ -5,11 +5,8 @@ using UnityEngine;
 public class DamagedScript : MonoBehaviour
 {
     public int currentHp;
-
     public bool isDie;
-
     public StartHpScript startHpScript;
-
     public SpriteRenderer spriteRenderer;
 
     public virtual void Ondamaged(int power)
