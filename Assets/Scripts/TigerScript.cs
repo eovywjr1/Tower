@@ -108,7 +108,7 @@ public class TigerScript : BossBaseScript
     {
         biteFindTarget.SetActive(true);
         biteFindTarget.transform.position = transform.position;
-        StartCoroutine(PatternStartCorutine(Color.white, 0.5f, BiteFindTargetStop));
+        StartCoroutine(PatternStartCorutine(Color.white, 0.4f, BiteFindTargetStop));
     }
     
     void BiteFindTargetStop()

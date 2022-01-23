@@ -6,7 +6,8 @@ public class ChickenScript : BossBaseScript
 {
     public Vector3 direction;
     public Rigidbody2D rigidBody;
-    public GameObject eggMinePrefab, eggMine, chickPrefab, chick;
+    public GameObject eggMinePrefab, eggMine, chickPrefab, chick, findTarget, peck;
+    public bool isPeck;
 
     void Start()
     {
@@ -67,16 +68,42 @@ public class ChickenScript : BossBaseScript
     void CreateChick()
     {
         chick = Instantiate(chickPrefab);
-        chick.transform.position = transform.position;
+        chick.transform.position = new Vector2(Random.Range(-20, 20), Random.Range(-20, 20));
 
         StartCoroutine(PatternCooltime());
     }
 
+    void FindTargetStart()
+    {
+        findTarget.SetActive(true);
+        findTarget.transform.position = transform.position;
+        StartCoroutine(PatternStartCorutine(Color.white, 0.5f, FindTargetStop));
+    }
+
+    void FindTargetStop()
+    {
+        findTarget.SetActive(false);
+
+        StartCoroutine(PatternCooltime());
+    }
+
+    public void Peck()
+    {
+        findTarget.SetActive(false);
+        peck.SetActive(true);
+        StartCoroutine(ExecuteMethodCorutine(0.5f, PeckStop));
+    }
+
+    void PeckStop()
+    {
+        peck.SetActive(false);
+    }
+
     IEnumerator PatternCooltime()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(1.5f);
 
-        patternIndex = Random.Range(0, 2);
+        patternIndex = Random.Range(0, 3);
         switch (patternIndex)
         {
             case 0:
@@ -84,6 +111,9 @@ public class ChickenScript : BossBaseScript
                 break;
             case 1:
                 StartCoroutine(PatternStartCorutine(Color.red, 1f, CreateChick));
+                break;
+            case 2:
+                StartCoroutine(PatternStartCorutine(Color.red, 1f, FindTargetStart));
                 break;
         }
     }

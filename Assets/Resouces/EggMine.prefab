@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5385526559930522716}
   - component: {fileID: 5385526559930522715}
   - component: {fileID: 9071791920571163352}
+  - component: {fileID: -4808355198516811720}
   m_Layer: 9
   m_Name: EggMine
   m_TagString: Untagged
@@ -160,3 +161,15 @@ PolygonCollider2D:
       - {x: 0.35, y: -1.62}
       - {x: 0.48999998, y: -1.54}
       - {x: 0.61, y: -1.49}
+--- !u!114 &-4808355198516811720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5385526559930522714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415043c07c8b9f74984a0a1421221605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

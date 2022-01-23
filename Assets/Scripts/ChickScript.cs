@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChickScript : DamagedScript
+public class ChickScript : MonoBehaviour
 {
     public PlayerScript playerScript;
 
@@ -23,8 +23,7 @@ public class ChickScript : DamagedScript
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (collision.CompareTag("PlayerAttack"))
-            Destroy(this);
+            Destroy(this.gameObject);
     }
 }

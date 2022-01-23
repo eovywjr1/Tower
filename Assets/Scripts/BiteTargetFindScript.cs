@@ -6,6 +6,7 @@ public class BiteTargetFindScript : MonoBehaviour
 {
     public TigerScript tigerScript;
     public SnakeScript snakeScript;
+    public ChickenScript chickenScript;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -22,6 +23,8 @@ public class BiteTargetFindScript : MonoBehaviour
                 else if (snakeScript.isTighten)
                     snakeScript.Tighten();
             }
+            else if (chickenScript != null)
+                chickenScript.Peck();
         }
     }
 }
