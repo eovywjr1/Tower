@@ -1659,6 +1659,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
+  skillObject: {fileID: 420965617}
   direction: {x: 0, y: 0, z: 0}
   rigidBody: {fileID: 0}
   eggMinePrefab: {fileID: 5385526559930522714, guid: cc7be3cb6dcc1ec46bd941966d917af7, type: 3}

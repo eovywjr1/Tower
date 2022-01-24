@@ -49,6 +49,7 @@ public class DragonScript : BossBaseScript
 
         originPosition = transform.position;
         fireGroundLineRenderer.SetPosition(0, originPosition);
+        fireGroundLineRenderer.SetPosition(1, originPosition);
 
         isDash = true;
     }

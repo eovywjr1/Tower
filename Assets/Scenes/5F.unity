@@ -8490,6 +8490,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
+  skillObject: {fileID: 91528356}
   originPosition: {x: 0, y: 0, z: 0}
   fire: {fileID: 1173910117}
   fireGround: {fileID: 0}

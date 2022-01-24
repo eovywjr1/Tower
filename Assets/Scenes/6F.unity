@@ -1767,6 +1767,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 0}
   playerScript: {fileID: 0}
+  skillObject: {fileID: 706156444}
   findTarget: {fileID: 1718578964}
   bite: {fileID: 136910737}
   tail: {fileID: 1178604482}
@@ -2376,6 +2377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tigerScript: {fileID: 0}
   snakeScript: {fileID: 1369588790}
+  chickenScript: {fileID: 0}
 --- !u!61 &1718578967
 BoxCollider2D:
   m_ObjectHideFlags: 0

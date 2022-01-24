@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
         switch (mapName)
         {
             case "1F":
+                bossHpInput.text = "10";
+                playerHpInput.text = "5";
+                break;
             case "2F":
                 bossHpInput.text = "50";
                 playerHpInput.text = "5";

@@ -327,6 +327,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 1569316520}
   playerScript: {fileID: 0}
+  skillObject: {fileID: 1443441273}
   wind: {fileID: 1710480217}
   scratch: {fileID: 1270196361}
   bite: {fileID: 821460745}
@@ -517,6 +518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tigerScript: {fileID: 140251566}
   snakeScript: {fileID: 0}
+  chickenScript: {fileID: 0}
 --- !u!1 &266124818
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,10 +4630,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0230fcf4be452b142a3fdc7a4d23b140, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

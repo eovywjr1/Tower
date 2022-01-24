@@ -120,7 +120,6 @@ public class SnakeScript : BossBaseScript
             case 2:
                 isTighten = true;
                 StartCoroutine(PatternStartCorutine(Color.red, 1f, FindTargetStart));
-
                 break;
             case 3:
                 PrepareMove();

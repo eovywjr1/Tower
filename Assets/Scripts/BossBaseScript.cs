@@ -12,6 +12,7 @@ public class BossBaseScript : DamagedScript
 
     public UiManager uiManager;
     public PlayerScript playerScript;
+    public GameObject skillObject;
 
     public void Awake()
     {
@@ -29,6 +30,9 @@ public class BossBaseScript : DamagedScript
         if (isDie)
         {
             uiManager.FirstTalkShow();
+
+            if (skillObject != null)
+                skillObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }
