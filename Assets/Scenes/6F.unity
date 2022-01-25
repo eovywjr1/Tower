@@ -2244,7 +2244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossHp: 300
   playerHp: 12
-  loadMapName: 5F
+  loadMapName: 7F
   startHpScript: {fileID: 0}
   listScene: {fileID: 0}
   status: {fileID: 0}

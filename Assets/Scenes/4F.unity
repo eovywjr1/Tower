@@ -2626,18 +2626,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 20
+    m_FontSize: 80
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 80
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 30.0
 --- !u!222 &1211925776
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2662,8 +2662,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 212, y: 133}
-  m_SizeDelta: {x: 100, y: 29}
+  m_AnchoredPosition: {x: 822.9757, y: 467.69098}
+  m_SizeDelta: {x: 270, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1235061061
 GameObject:
@@ -3400,6 +3400,7 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   uiManager: {fileID: 1299834686}
   playerScript: {fileID: 492711612}
+  skillObject: {fileID: 0}
   moveSpeed: 5
   direction: {x: 0, y: 0, z: 0}
   isMove: 0
