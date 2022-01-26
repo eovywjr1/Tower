@@ -21,7 +21,7 @@ public class DamagedScript : MonoBehaviour
 
     public IEnumerator ExecuteMethodCorutine(float time, System.Action action)
     {
-        yield return new WaitForSecondsRealtime(time);
+        yield return new WaitForSeconds(time);
 
         action();
     }

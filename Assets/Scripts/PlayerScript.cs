@@ -5,29 +5,24 @@ using UnityEngine;
 public class PlayerScript : DamagedScript
 {
     public int power, talkId;
-
     public float horizontal, vertical, moveSpeed;
     public float attackSpeed = 0.5f;
     public float attackAnimationSpeed = 1f;
-
     public bool isHorizentalDown, isVerticalDown, isTalk, isDamaged, isAttackDelay, isAvoidanceDelay;
     public bool isAvoidancePossible, isFaint;
-
     public Vector2 moveDireciton;
-
     Rigidbody2D rigidBody;
     Animator animator;
-
     public GameObject attackObject;
     public BoxCollider2D attackCollider;
-
-    public UiManager uiManager;
+    UiManager uiManager;
     BossBaseScript bossBaseScript;
 
     public void Awake()
     {
         startHpScript = FindObjectOfType<StartHpScript>();
         bossBaseScript = FindObjectOfType<BossBaseScript>();
+        uiManager = FindObjectOfType<UiManager>();
 
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,7 +34,7 @@ public class PlayerScript : DamagedScript
 
     private void Update()
     {
-        if (!isTalk)
+        if (!isTalk && !GameManager.isPause)
         {
             animator.SetBool("isState", false);
 
@@ -70,7 +65,7 @@ public class PlayerScript : DamagedScript
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (!isTalk && !isAttackDelay && !isFaint && !isDie)
             Move();
@@ -157,18 +152,18 @@ public class PlayerScript : DamagedScript
         isAttackDelay = true;
         animator.SetFloat("AttackSpeed", attackAnimationSpeed); //attackSpeed 0.1 감소 >> attackAnimationSpeed 0.2 증가
         animator.SetBool("isAttack", true);
-        attackObject.transform.position = transform.position;
 
         StartCoroutine(ExecuteMethodCorutine(0.01f, UnAttackAnimation));
+    }
+
+    void ActiveAttack()
+    {
+        attackObject.transform.position = transform.position;
     }
 
     void UnAttack()
     {
         isAttackDelay = false;
-    }
-
-    public void ChangeAttackPosition()
-    {
         attackObject.transform.position = new Vector3(100, 100);
     }
 

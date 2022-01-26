@@ -15,35 +15,38 @@ public class CowScript : BossBaseScript
 
     public bool isPattern, isDash, isPushDown, isGoToFeed;
 
-    public void Update()
+    void Update()
     {
-        if (!isPattern)
+        if (!GameManager.isPause)
         {
-            isPattern = true;
-            StartCoroutine(PatternCooltime());
-        }
-
-        if (isDash)
-        {
-            Dash();
-
-            //대쉬 후 위치 같으면 종료
-            if (transform.position == playerPosition)
+            if (!isPattern)
             {
-                isPattern = false;
-                isDash = false;
-                gameObject.layer = 6;
+                isPattern = true;
+                StartCoroutine(PatternCooltime());
             }
-        }
 
-        if(isGoToFeed)
-        {
-            if (feedIndex > 3)
-                EndFeed();
-            else if (feed[feedIndex].activeSelf)
-                GoToFeed(feedIndex);
-            else
-                feedIndex++;
+            if (isDash)
+            {
+                Dash();
+
+                //대쉬 후 위치 같으면 종료
+                if (transform.position == playerPosition)
+                {
+                    isPattern = false;
+                    isDash = false;
+                    gameObject.layer = 6;
+                }
+            }
+
+            if (isGoToFeed)
+            {
+                if (feedIndex > 3)
+                    EndFeed();
+                else if (feed[feedIndex].activeSelf)
+                    GoToFeed(feedIndex);
+                else
+                    feedIndex++;
+            }
         }
     }
 
@@ -161,7 +164,7 @@ public class CowScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
 
         playerPosition = playerScript.transform.position;
 

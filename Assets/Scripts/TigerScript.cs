@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TigerScript : BossBaseScript
 {
-    public GameObject wind, scratch, bite, biteFindTarget;
+    public GameObject wind, scratch, bite;
     public Vector3 reverseDirection;
     public Rigidbody2D rigidBody;
 
@@ -106,21 +106,21 @@ public class TigerScript : BossBaseScript
 
     void BiteFindTargetStart()
     {
-        biteFindTarget.SetActive(true);
-        biteFindTarget.transform.position = transform.position;
+        findTarget.SetActive(true);
+        findTarget.transform.position = transform.position;
         StartCoroutine(PatternStartCorutine(Color.white, 0.4f, BiteFindTargetStop));
     }
     
     void BiteFindTargetStop()
     {
-        biteFindTarget.SetActive(false);
+        findTarget.SetActive(false);
 
         StartCoroutine(PatternCooltime());
     }
 
     public void Bite()
     {
-        biteFindTarget.SetActive(false);
+        findTarget.SetActive(false);
         bite.SetActive(true);
         StartCoroutine(ExecuteMethodCorutine(0.5f, BiteStop));
     }
@@ -132,7 +132,7 @@ public class TigerScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
 
         playerPosition = playerScript.transform.position;
 

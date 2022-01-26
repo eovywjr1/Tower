@@ -7,16 +7,49 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public int bossHp, playerHp;
+    public static bool isPause;
     public string loadMapName;
     public StartHpScript startHpScript;
-    public Image listScene;
-    public Image status;
-    public InputField bossHpInput;
-    public InputField playerHpInput;
+    public Image listScene, status, pause;
+    public InputField bossHpInput, playerHpInput;
 
     private void Start()
     {
         startHpScript = FindObjectOfType<StartHpScript>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pause.gameObject.activeSelf)
+                Back();
+            else
+                Pause();
+        }
+    }
+
+    void Pause()
+    {
+        isPause = true;
+        pause.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void Back()
+    {
+        isPause = false;
+        pause.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void ReStart()
+    {
+        Back();
+        bossHp = startHpScript.bossHp;
+        playerHp = startHpScript.playerHp;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     //새로하기
@@ -40,12 +73,12 @@ public class GameManager : MonoBehaviour
                 playerHpInput.text = "5";
                 break;
             case "3F":
-                bossHpInput.text = "100";
-                playerHpInput.text = "7";
+                bossHpInput.text = "150";
+                playerHpInput.text = "5";
                 break;
             case "4F":
                 bossHpInput.text = "100";
-                playerHpInput.text = "7";
+                playerHpInput.text = "5";
                 break;
             case "5F":
                 bossHpInput.text = "200";
@@ -64,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadTitle()
     {
+        Back();
         SceneManager.LoadScene("Title");
     }
 

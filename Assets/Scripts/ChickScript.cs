@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class ChickScript : MonoBehaviour
 {
-    public PlayerScript playerScript;
-
-    void Start()
-    {
-        playerScript = FindObjectOfType<PlayerScript>();
-    }
-
     void Update()
     {
         Move();
@@ -18,7 +11,7 @@ public class ChickScript : MonoBehaviour
 
     void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, playerScript.transform.position, Time.deltaTime * 1);
+        transform.position = Vector3.MoveTowards(transform.position, PlayerPositionManager.playerPoistion, Time.deltaTime * 1);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

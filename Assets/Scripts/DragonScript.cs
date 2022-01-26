@@ -19,7 +19,7 @@ public class DragonScript : BossBaseScript
 
     private void Update()
     {
-        if (isDash)
+        if (isDash && !GameManager.isPause)
         {
             Dash();
 
@@ -93,7 +93,7 @@ public class DragonScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
 
         patternIndex = Random.Range(0, 2);
         switch (patternIndex)

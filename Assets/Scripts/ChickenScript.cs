@@ -6,7 +6,7 @@ public class ChickenScript : BossBaseScript
 {
     public Vector3 direction;
     public Rigidbody2D rigidBody;
-    public GameObject eggMinePrefab, eggMine, chickPrefab, chick, findTarget, peck;
+    public GameObject eggMinePrefab, eggMine, chickPrefab, chick, peck;
     public bool isPeck;
 
     void Start()
@@ -14,12 +14,6 @@ public class ChickenScript : BossBaseScript
         rigidBody = GetComponent<Rigidbody2D>();
 
         StartCoroutine(PatternCooltime());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void PlantEggMine()
@@ -101,7 +95,7 @@ public class ChickenScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
-        yield return new WaitForSecondsRealtime(1.5f);
+        yield return new WaitForSeconds(1.5f);
 
         patternIndex = Random.Range(0, 3);
         switch (patternIndex)

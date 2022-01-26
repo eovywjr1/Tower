@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SnakeScript : BossBaseScript
 {
-    public GameObject findTarget, bite, tail, tighten;
+    public GameObject bite, tail, tighten;
     public bool isBite, isTail, isMove, isTighten;
     public int moveSpeed;
     public Vector3 direction;
@@ -16,7 +16,7 @@ public class SnakeScript : BossBaseScript
 
     private void Update()
     {
-        if (isMove)
+        if (isMove && !GameManager.isPause)
         {
             Move();
 
@@ -102,7 +102,7 @@ public class SnakeScript : BossBaseScript
 
     IEnumerator PatternCooltime()
     {
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSeconds(3f);
 
         playerPosition = playerScript.transform.position;
 

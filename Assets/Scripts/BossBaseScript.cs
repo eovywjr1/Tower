@@ -5,20 +5,18 @@ using UnityEngine;
 public class BossBaseScript : DamagedScript
 {
     public int maxHp, patternIndex;
-
-    public bool isBossDamagePossible = true;
-
-    public Vector3 playerPosition;
-
+    public bool isBossDamagePossible = true, isPause;
     public UiManager uiManager;
     public PlayerScript playerScript;
-    public GameObject skillObject;
+    public GameObject skillObject, findTarget;
+    public Vector3 playerPosition;
 
     public void Awake()
     {
         startHpScript = FindObjectOfType<StartHpScript>();
-        playerScript = FindObjectOfType<PlayerScript>();
         uiManager = FindObjectOfType<UiManager>();
+        playerScript = FindObjectOfType<PlayerScript>();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         maxHp = startHpScript.bossHp;
@@ -50,7 +48,7 @@ public class BossBaseScript : DamagedScript
     {
         spriteRenderer.color = startColor;
 
-        yield return new WaitForSecondsRealtime(time);
+        yield return new WaitForSeconds(time);
 
         spriteRenderer.color = Color.white;
         action();
