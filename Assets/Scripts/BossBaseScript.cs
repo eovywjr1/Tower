@@ -10,6 +10,8 @@ public class BossBaseScript : DamagedScript
     public PlayerScript playerScript;
     public GameObject skillObject, findTarget;
     public Vector3 playerPosition;
+    public AudioSource audioSource;
+
 
     public void Awake()
     {

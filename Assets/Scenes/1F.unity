@@ -1416,6 +1416,7 @@ MonoBehaviour:
   skillObject: {fileID: 0}
   findTarget: {fileID: 0}
   playerPosition: {x: 0, y: 0, z: 0}
+  audioSource: {fileID: 0}
 --- !u!1 &1146301636
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,12 +3058,13 @@ MonoBehaviour:
   bossHp: 50
   playerHp: 5
   loadMapName: 2F
-  startHpScript: {fileID: 0}
   listScene: {fileID: 0}
   status: {fileID: 0}
   pause: {fileID: 1641160809}
+  option: {fileID: 0}
   bossHpInput: {fileID: 0}
   playerHpInput: {fileID: 0}
+  startHpScript: {fileID: 0}
 --- !u!1 &1619690967
 GameObject:
   m_ObjectHideFlags: 0
@@ -4309,6 +4311,7 @@ GameObject:
   - component: {fileID: 2048215321}
   - component: {fileID: 2048215323}
   - component: {fileID: 2048215324}
+  - component: {fileID: 2048215325}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4458,11 +4461,14 @@ MonoBehaviour:
   isDamaged: 0
   isAttackDelay: 0
   isAvoidanceDelay: 0
-  isAvoidancePossible: 0
+  isAvoidancePossible: 1
   isFaint: 0
   moveDireciton: {x: 0, y: 0}
   attackObject: {fileID: 432536953}
   attackCollider: {fileID: 0}
+  audioClip:
+  - {fileID: 8300000, guid: 5c810365d067a0d42b0224df9eadda13, type: 3}
+  - {fileID: 8300000, guid: 6bc8f40da8372ab49b323b5118ad1ea3, type: 3}
 --- !u!95 &2048215324
 Animator:
   serializedVersion: 3
@@ -4482,6 +4488,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &2048215325
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048215318}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2086460957
 GameObject:
   m_ObjectHideFlags: 0

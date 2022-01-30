@@ -5,15 +5,20 @@ using UnityEngine;
 public class CowScript : BossBaseScript
 {
     public int feedIndex;
-
     public float speed;
-
     public GameObject line, circle, dung;
     public GameObject[] feed;
     public LineRenderer[] directionRenderer;
     public LineRenderer lineRenderer;
-
     public bool isPattern, isDash, isPushDown, isGoToFeed;
+    public AudioClip[] audioClip;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
+    }
 
     void Update()
     {
@@ -76,7 +81,10 @@ public class CowScript : BossBaseScript
     {
         circle.transform.position = playerPosition;
         circle.SetActive(true);
-        StartCoroutine(ExecuteMethodCorutine(1f, PushDown));
+
+        PlaySound("pushDown");
+
+        StartCoroutine(ExecuteMethodCorutine(1.5f, PushDown));
     }
 
     void PushDown()
@@ -106,6 +114,7 @@ public class CowScript : BossBaseScript
                     break;
             }
         }
+
         StartCoroutine(ExecuteMethodCorutine(0.5f, EndDown));
     }
 
@@ -114,6 +123,9 @@ public class CowScript : BossBaseScript
         isBossDamagePossible = false;
         isPattern = false;
         dung.SetActive(true);
+
+        PlaySound("Cry");
+
         StartCoroutine(ExecuteMethodCorutine(10f, EndDung));
     }
 
@@ -160,6 +172,21 @@ public class CowScript : BossBaseScript
         currentHp += hp;
         if (maxHp < currentHp)
             currentHp = maxHp;
+    }
+
+    void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "pushDown":
+                audioSource.clip = audioClip[0];
+                break;
+            case "Cry":
+                audioSource.clip = audioClip[1];
+                break;
+        }
+
+        audioSource.Play();
     }
 
     IEnumerator PatternCooltime()

@@ -7,11 +7,15 @@ public class TigerScript : BossBaseScript
     public GameObject wind, scratch, bite;
     public Vector3 reverseDirection;
     public Rigidbody2D rigidBody;
+    public AudioClip[] audioClips;
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
 
         StartCoroutine(PatternCooltime());
     }
@@ -79,6 +83,8 @@ public class TigerScript : BossBaseScript
         wind.SetActive(true);
         ObjectArrange(wind, 6, 1, 0);
 
+        PlaySound("Cry");
+
         StartCoroutine(ExecuteMethodCorutine(1f, CryStop));
     }
 
@@ -128,6 +134,17 @@ public class TigerScript : BossBaseScript
     void BiteStop()
     {
         bite.SetActive(false);
+    }
+
+    void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "Cry":
+                audioSource.clip = audioClips[0];
+                break;
+        }
+        audioSource.Play();
     }
 
     IEnumerator PatternCooltime()

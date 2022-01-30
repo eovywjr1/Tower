@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : DamagedScript
 {
@@ -17,6 +18,8 @@ public class PlayerScript : DamagedScript
     public BoxCollider2D attackCollider;
     UiManager uiManager;
     BossBaseScript bossBaseScript;
+    AudioSource audioSource;
+    public AudioClip[] audioClip;
 
     public void Awake()
     {
@@ -27,7 +30,10 @@ public class PlayerScript : DamagedScript
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         attackCollider = attackObject.GetComponent<BoxCollider2D>();
+
+        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
 
         currentHp = startHpScript.playerHp;
     }
@@ -152,8 +158,24 @@ public class PlayerScript : DamagedScript
         isAttackDelay = true;
         animator.SetFloat("AttackSpeed", attackAnimationSpeed); //attackSpeed 0.1 감소 >> attackAnimationSpeed 0.2 증가
         animator.SetBool("isAttack", true);
+        PlaySound("Attack");
 
         StartCoroutine(ExecuteMethodCorutine(0.01f, UnAttackAnimation));
+    }
+
+    void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "Attack":
+                audioSource.clip = audioClip[0];
+                break;
+            case "Avoidance":
+                audioSource.clip = audioClip[1];
+                break;
+        }
+
+        audioSource.Play();
     }
 
     void ActiveAttack()
@@ -175,8 +197,10 @@ public class PlayerScript : DamagedScript
     //회피 함수
     void Avoidance()
     {
+        PlaySound("Avoidance");
         isAvoidanceDelay = true;
         this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 4, transform.position.y + vertical * 4);
+
         StartCoroutine(ExecuteMethodCorutine(5f, UnAvoidance));
     }
 

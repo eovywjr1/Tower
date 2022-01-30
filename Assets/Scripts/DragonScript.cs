@@ -7,13 +7,17 @@ public class DragonScript : BossBaseScript
     int dashSpeed = 5, dashDirection;
     bool isDash;
     public Vector3 originPosition;
-
     public GameObject fire, fireGround, fireGroundPrefab;
     public LineRenderer fireGroundLineRenderer;
     public BoxCollider2D fireGroundBoxCollider;
+    public AudioClip[] audioClips;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
+
         StartCoroutine(PatternCooltime());
     }
 
@@ -82,6 +86,9 @@ public class DragonScript : BossBaseScript
     {
         fire.transform.position = transform.position;
         fire.SetActive(true);
+
+        PlaySound("Fire");
+
         StartCoroutine(ExecuteMethodCorutine(2f, EndFire));
     }
 
@@ -91,6 +98,16 @@ public class DragonScript : BossBaseScript
         StartCoroutine(PatternCooltime());
     }
 
+    void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "Fire":
+                audioSource.clip = audioClips[0];
+                break;
+        }
+        audioSource.Play();
+    }
     IEnumerator PatternCooltime()
     {
         yield return new WaitForSeconds(3f);

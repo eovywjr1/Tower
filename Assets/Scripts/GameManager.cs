@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     public int bossHp, playerHp;
     public static bool isPause;
     public string loadMapName;
-    public StartHpScript startHpScript;
-    public Image listScene, status, pause;
+    public Image listScene, status, pause, option;
     public InputField bossHpInput, playerHpInput;
+    public StartHpScript startHpScript;
 
     private void Start()
     {
@@ -22,10 +22,13 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pause.gameObject.activeSelf)
-                Back();
-            else
-                Pause();
+            if (pause != null)
+            {
+                if (pause.gameObject.activeSelf)
+                    Back();
+                else
+                    Pause();
+            }
         }
     }
 
@@ -73,7 +76,7 @@ public class GameManager : MonoBehaviour
                 playerHpInput.text = "5";
                 break;
             case "3F":
-                bossHpInput.text = "150";
+                bossHpInput.text = "200";
                 playerHpInput.text = "5";
                 break;
             case "4F":
@@ -132,5 +135,20 @@ public class GameManager : MonoBehaviour
     public void CloseStatus()
     {
         status.gameObject.SetActive(false);
+    }
+
+    public void OpenOption()
+    {
+        option.gameObject.SetActive(true);
+    }
+
+    public void CloseOption()
+    {
+        option.gameObject.SetActive(false);
+    }
+
+    public void CloseListScene()
+    {
+        listScene.gameObject.SetActive(false);
     }
 }
