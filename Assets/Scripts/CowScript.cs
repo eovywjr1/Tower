@@ -17,7 +17,7 @@ public class CowScript : BossBaseScript
     {
         audioSource = GetComponent<AudioSource>();
 
-        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
+        audioSource.volume = EffectAudioScript.value;
     }
 
     void Update()

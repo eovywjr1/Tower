@@ -9,12 +9,15 @@ public class AudioManager : MonoBehaviour
     public static AudioSource backGroundAudioSource;
     public Text audioOnOffText;
     public Image option;
-    public Slider slider;
+    public Slider backGroundSlider, effectSlider;
         
     void Start()
     {
         backGroundAudioScript = FindObjectOfType<BackGroundAudioScript>();
         backGroundAudioSource = backGroundAudioScript.GetComponent<AudioSource>();
+
+        backGroundSlider.value = backGroundAudioSource.volume;
+        effectSlider.value = EffectAudioScript.value;
     }
 
     public void OnOff()
@@ -32,8 +35,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Change()
+    public void BackGroundChange()
     {
-        backGroundAudioSource.volume = slider.value;
+        backGroundAudioSource.volume = backGroundSlider.value;
+    }
+
+    public void EffectGroundChange()
+    {
+        EffectAudioScript.value = effectSlider.value;
     }
 }

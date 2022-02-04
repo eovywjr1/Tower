@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerScript : DamagedScript
 {
@@ -12,6 +13,7 @@ public class PlayerScript : DamagedScript
     public bool isHorizentalDown, isVerticalDown, isTalk, isDamaged, isAttackDelay, isAvoidanceDelay;
     public bool isAvoidancePossible, isFaint;
     public Vector2 moveDireciton;
+    public Image dashPossibleImage;
     Rigidbody2D rigidBody;
     Animator animator;
     public GameObject attackObject;
@@ -33,7 +35,7 @@ public class PlayerScript : DamagedScript
         audioSource = GetComponent<AudioSource>();
         attackCollider = attackObject.GetComponent<BoxCollider2D>();
 
-        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
+        audioSource.volume = EffectAudioScript.value;
 
         currentHp = startHpScript.playerHp;
     }
@@ -201,12 +203,16 @@ public class PlayerScript : DamagedScript
         isAvoidanceDelay = true;
         this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 4, transform.position.y + vertical * 4);
 
+        dashPossibleImage.gameObject.SetActive(false);
+
         StartCoroutine(ExecuteMethodCorutine(5f, UnAvoidance));
     }
 
     void UnAvoidance()
     {
         isAvoidanceDelay = false;
+
+        dashPossibleImage.gameObject.SetActive(true);
     }
 
     public bool JudgeDie()

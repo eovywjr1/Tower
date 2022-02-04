@@ -16,7 +16,7 @@ public class DragonScript : BossBaseScript
     {
         audioSource = GetComponent<AudioSource>();
 
-        audioSource.volume = FindObjectOfType<BackGroundAudioScript>().GetComponent<AudioSource>().volume;
+        audioSource.volume = EffectAudioScript.value;
 
         StartCoroutine(PatternCooltime());
     }
