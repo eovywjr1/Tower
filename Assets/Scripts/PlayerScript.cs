@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class PlayerScript : DamagedScript
 {
     public int power, talkId;
-    public float horizontal, vertical, moveSpeed;
+    public float horizontal, vertical, moveSpeed, currentTime, startTime;
     public float attackSpeed = 0.5f;
     public float attackAnimationSpeed = 1f;
     public bool isHorizentalDown, isVerticalDown, isTalk, isDamaged, isAttackDelay, isAvoidanceDelay;
-    public bool isAvoidancePossible, isFaint;
+    public bool isAvoidancePossible, isFaint, isEnded = true;
     public Vector2 moveDireciton;
     public Image dashPossibleImage;
+    public Text dashPossibleText;
     Rigidbody2D rigidBody;
     Animator animator;
     public GameObject attackObject;
@@ -71,6 +72,9 @@ public class PlayerScript : DamagedScript
             animator.SetBool("isState", true);
             Stop();
         }
+
+        if (!isEnded)
+            UpdateCoolTime();
     }
 
     void FixedUpdate()
@@ -201,9 +205,19 @@ public class PlayerScript : DamagedScript
     {
         PlaySound("Avoidance");
         isAvoidanceDelay = true;
-        this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 4, transform.position.y + vertical * 4);
 
-        dashPossibleImage.gameObject.SetActive(false);
+        if (transform.position.x > 27 && horizontal == 1)
+            transform.position = new Vector2(32.39501f, transform.position.y + vertical * 4);
+        else if(transform.position.x < -30 && horizontal == -1)
+            transform.position = new Vector2(-35.39499f, transform.position.y + vertical * 4);
+        else if(transform.position.y > 25 && horizontal == 1)
+            transform.position = new Vector2(transform.position.x + horizontal * 4, 30.34739f);
+        else if (transform.position.y < -24 && horizontal == 1)
+            transform.position = new Vector2(transform.position.x + horizontal * 4, -29.14738f);
+        else
+            this.gameObject.transform.position = new Vector2(transform.position.x + horizontal * 4, transform.position.y + vertical * 4);
+
+        ResetTeleport();
 
         StartCoroutine(ExecuteMethodCorutine(5f, UnAvoidance));
     }
@@ -214,6 +228,38 @@ public class PlayerScript : DamagedScript
 
         dashPossibleImage.gameObject.SetActive(true);
     }
+
+    void UpdateCoolTime()
+    {
+        currentTime = Time.time - startTime;
+        if (currentTime <= 5f)
+            SetFillAmount(5f - currentTime);
+        else
+            EndCoolTime();
+    }
+
+    void ResetTeleport() 
+    {
+        currentTime = 5f;
+        dashPossibleText.gameObject.SetActive(true);
+        SetFillAmount(5f);
+        startTime = Time.time;
+        isEnded = false;
+    }
+
+    void SetFillAmount(float time)
+    {
+        dashPossibleImage.fillAmount = time / 5f;
+        dashPossibleText.text = time.ToString("0.0");
+    }
+
+    void EndCoolTime()
+    {
+        SetFillAmount(0);
+        dashPossibleText.gameObject.SetActive(false);
+        isEnded = true;
+    }
+
 
     public bool JudgeDie()
     {

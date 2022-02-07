@@ -26,23 +26,33 @@ public class ChickenScript : BossBaseScript
 
     void FindDirection()
     {
-        int directionIndex = Random.Range(0, 5);
+        float x = transform.position.x, y = transform.position.y;
+        int random = Random.Range(0, 4);
 
-        switch (directionIndex)
+        switch (random)
         {
             case 0:
-                direction = Vector3.left;
-                break;
-            case 1:
-                direction = Vector3.right;
-                break;
-            case 2:
-                direction = Vector3.down;
-                break;
-            case 3:
                 direction = Vector3.up;
                 break;
+            case 1:
+                direction = Vector3.down;
+                break;
+            case 2:
+                direction = Vector3.left;
+                break;
+            case 3:
+                direction = Vector3.right;
+                break;
         }
+
+        if (x > 25)
+            direction = new Vector2(-1, direction.y);
+        else if (x < -25)
+            direction = new Vector2(1, direction.y);
+        if (y > 25)
+            direction = new Vector2(direction.x, -1);
+        else if (y < -25)
+            direction = new Vector2(direction.x, 1);
     }
 
     void Move()

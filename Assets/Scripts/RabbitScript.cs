@@ -21,6 +21,7 @@ public class RabbitScript : BossBaseScript
 
     void RandomDirection()
     {
+        float x = transform.position.x, y = transform.position.y;
         int random = Random.Range(0, 4);
 
         switch (random)
@@ -38,6 +39,15 @@ public class RabbitScript : BossBaseScript
                 direction = Vector3.right;
                 break;
         }
+
+        if (x > 25)
+            direction = new Vector2(-1, direction.y);
+        else if (x < -25)
+            direction = new Vector2(1, direction.y);
+        if (y > 25)
+            direction = new Vector2(direction.x, -1);
+        else if (y < -25)
+            direction = new Vector2(direction.x, 1);
     }
 
     void Move()
