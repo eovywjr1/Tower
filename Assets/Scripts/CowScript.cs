@@ -206,7 +206,7 @@ public class CowScript : BossBaseScript
         switch (patternIndex)
         {
             case 0:
-                StartFeed();
+                ReadyFeed();
                 break;
             case 1:
                 CircleActive();
