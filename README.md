@@ -32,18 +32,21 @@
 ![타워캐릭터](https://user-images.githubusercontent.com/40791869/216668203-81ff285b-e225-495c-b697-56c00e1d54ca.gif)
     
     이동, 공격, 대쉬, 체력, 공격력
+    
     <br/><br/>
     
 #### 타이틀 화면
 ![타워타이틀설정](https://user-images.githubusercontent.com/40791869/216666772-93cdca82-d651-4b96-84b8-4702a65d44c5.gif)
 
     스테이지 선택, 보스 / 플레이어 체력 설정, 배경 음악 On/Off, 소리 크기 조절
+    
     <br/><br/>
     
 #### 1층(쥐, 튜토리얼)
 ![타워1층](https://user-images.githubusercontent.com/40791869/216669684-377ccca9-26d6-4fc4-bae1-836030b92ea0.gif)
 
     플레이어가 네비게이션 화살표에 닿으면 오브젝트 삭제
+    
     <br/><br/>
       
     - 2층(소)
