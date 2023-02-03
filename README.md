@@ -27,10 +27,13 @@
   <br/><br/>
 
 ## 구현 기능
-  - 캐릭터
-    - 이동, 공격, 대쉬
-    - 체력, 공격력, 공격속도
-  
+
+#### 캐릭터
+![타워캐릭터](https://user-images.githubusercontent.com/40791869/216668203-81ff285b-e225-495c-b697-56c00e1d54ca.gif)
+    
+    이동, 공격, 대쉬, 체력, 공격력
+    <br/><br/>
+    
 #### 타이틀 화면
 ![타워타이틀설정](https://user-images.githubusercontent.com/40791869/216666772-93cdca82-d651-4b96-84b8-4702a65d44c5.gif)
 
