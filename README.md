@@ -57,7 +57,8 @@
 <br/><br/>
       
 #### 3층(호랑이)
-![타워3층](https://user-images.githubusercontent.com/40791869/216750025-3bbf8d42-e811-4037-a445-5e6d5c2e148c.gif)
+![타워3층](https://user-images.githubusercontent.com/40791869/216750126-3b2c4a3c-6154-4194-bf18-56ee81bde648.gif)
+
 
     포효(기절), 물어뜯기, 할퀴기
 <br/><br/>
