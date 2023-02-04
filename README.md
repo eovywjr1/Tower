@@ -76,7 +76,7 @@
  <br/><br/>
  
 #### 6층(뱀)
-<br/><br/>
+![타워6층](https://user-images.githubusercontent.com/40791869/216751968-a35b0c0c-53c7-489f-ab3a-f2fd954fb944.gif)
 
     물어뜯기, 꼬리치기, 조이기, 이동하는 동안 공격 유효하지 않음
  <br/><br/>
